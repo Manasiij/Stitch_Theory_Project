@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Commerce Shopping Cart</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body{
+      background: linear-gradient(to right, #f8f9fa, #ececec);
+
+    }
+    .product-card {
+     border: 1px solid #eee;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      background: #fff;
+    }
+    .cart-sidebar {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    }
+    .btn-cart {
+      background: #ff6f00;
+      color: #fff;
+      border: none;
+    }
+    .btn-cart:hover {
+      background: #e65100;
+    }
+  </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+        <img src="images/stitch theory logo.jpg" alt="logo" width="50" height="50" class="me-2">
+        
+        Stitch Theory
+
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Top Deals</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Cart</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Our Products
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">All products</a></li>
+            <li><a class="dropdown-item" href="#">Women's Clothing</a></li>
+            <li><a class="dropdown-item" href="#">Men's clothing</a></li>
+            <li><a class="dropdown-item" href="#">Children's clothing</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+    </header>
+
+  <div class="container py-4">
+    
+    <div class="row">
+      <!-- Product Grid -->
+      <div class="col-lg-8">
+        <h4 class="fw-bold mb-3 text-white">Shop Products</h4>
+        <div class="row g-4">
+          
+          <!-- Product 1 -->
+          <div class="col-md-3">
+            <div class="product-card">
+              <img src="https://www.fabfunda.com/product-img/thumb/heavy-crepe-black-one-piece-dr-1737637734.jpeg" class="img-fluid" alt="One Piece Dress">
+              <h6>One Piece Dress</h6>
+              <p class="fw-bold">₹1000</p>
+              <button class="btn btn-outline-warning w-100">🛒</button>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div class="col-md-3">
+            <div class="product-card">
+              <img src="https://janasya.com/cdn/shop/files/JAC25KR02633.jpg?v=1756810297&width=1080" height="220px" class="img-fluid" alt="Trendy kurti">
+              <h6>Trendy kurti</h6>
+              <p class="fw-bold">₹500</p>
+              <button class="btn btn-outline-warning w-100">🛒</button>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div class="col-md-3">
+            <div class="product-card">
+              <img src="https://assets.myntassets.com/w_412,q_30,dpr_3,fl_progressive,f_webp/assets/images/30257319/2024/10/7/a7219db4-330b-49aa-baa6-69e5f2d0c5961728301989658-Womens-Oversize-Long-Sleeve-Johny-Collar-Pue-Cotton-Shirt-57-1.jpg" height="230px" class="img-fluid" alt="White shirt">
+              <h6>White shirt</h6>
+              <p class="fw-bold">₹300</p>
+              <button class="btn btn-outline-warning w-100">🛒</button>
+            </div>
+          </div>
+
+          <!-- Product 4 -->
+          <div class="col-md-3">
+            <div class="product-card">
+              <img src="https://static.aceomni.cmsaceturtle.com/prod/product-image/aceomni/Wrangler/Monobrand/WWTS001174/WWTS001174_1.jpg" height="230px"  class="img-fluid" alt="Blue T-shirt">
+              <h6>Blue T-shirt</h6>
+              <p class="fw-bold">₹250</p>
+              <button class="btn btn-outline-warning w-100">🛒</button>
+            </div>
+          </div>
+
+          <!-- Product 5 -->
+          <div class="col-md-3">
+            <div class="product-card">
+              <img src="https://assets2.andaazfashion.com/media/catalog/product/r/e/red-georgette-floor-length-wedding-wear-anarkali-suit-lstv113260-1.jpg" height="230px" class="img-fluid" alt="Red Anarkali set">
+              <h6>Red Anarkali set</h6>
+              <p class="fw-bold">₹2000</p>
+              <button class="btn btn-outline-warning w-100">🛒</button>
+            </div>
+          </div>
+
+          <!-- Product 6 -->
+          <div class="col-md-3">
+            <div class="product-card">
+              <img src="https://thelotusfab.in/cdn/shop/files/ShrijiAvadh-SC-385-Purple_4.jpg?v=1753969392" height="230px"  class="img-fluid" alt="Party ware saree">
+              <h6>Party ware saree</h6>
+              <p class="fw-bold">₹1500</p>
+              <button class="btn btn-outline-warning w-100">🛒</button>
+            </div>
+          </div>
+
+          <!-- Product 7 -->
+          <div class="col-md-3">
+            <div class="product-card">
+              <img src="https://www.vinusto.in/cdn/shop/products/Untitleddesign_79_800x.jpg?v=1603112625" class="img-fluid" alt="Kurta set">
+              <h6>Kurta Set</h6>
+              <p class="fw-bold">₹500</p>
+              <button class="btn btn-outline-warning w-100">🛒</button>
+            </div>
+          </div>
+
+          <!-- Product 8 -->
+          <div class="col-md-3">
+            <div class="product-card">
+              <img src="https://kankaari.com/cdn/shop/files/ShrijiAvadh-SC-126-Mehndi_4.jpg?v=1756186605" class="img-fluid" alt="Musturd color saree">
+              <h6>Musturd color saree</h6>
+              <p class="fw-bold">₹1300</p>
+              <button class="btn btn-outline-warning w-100">🛒</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Cart Sidebar -->
+      <div class="col-lg-4">
+        <div class="cart-sidebar mt-5">
+          <h5 class="fw-bold mb-3">Your Cart</h5>
+
+          <!-- Example Cart Item -->
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <img src="https://thelotusfab.in/cdn/shop/files/ShrijiAvadh-SC-385-Purple_4.jpg?v=1753969392" height="230px"  class="img-fluid" alt="Party ware saree" class="rounded" width="50">
+            <div class="ms-2">
+              <p class="mb-0">Party ware saree</p>
+              <small>₹1500</small>
+            </div>
+            <div class="input-group input-group-sm ms-2" style="width: 100px;">
+              <button class="btn btn-outline-secondary">-</button>
+              <input type="text" class="form-control text-center" value="1">
+              <button class="btn btn-outline-secondary">+</button>
+            </div>
+            <button class="btn btn-sm btn-danger ms-2">🗑</button>
+          </div>
+
+          <!-- Another Cart Item -->
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <img src="https://static.aceomni.cmsaceturtle.com/prod/product-image/aceomni/Wrangler/Monobrand/WWTS001174/WWTS001174_1.jpg" class="rounded" alt="" width="50">
+            <div class="ms-2">
+              <p class="mb-0">Blue T-shirt</p>
+              <small>₹250</small>
+            </div>
+            <div class="input-group input-group-sm ms-2" style="width: 100px;">
+              <button class="btn btn-outline-secondary">-</button>
+              <input type="text" class="form-control text-center" value="3">
+              <button class="btn btn-outline-secondary">+</button>
+            </div>
+            <button class="btn btn-sm btn-danger ms-2">🗑</button>
+          </div>
+
+          <!-- Another Cart Item -->
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <img src="https://assets2.andaazfashion.com/media/catalog/product/r/e/red-georgette-floor-length-wedding-wear-anarkali-suit-lstv113260-1.jpg" class="rounded" alt="Red Anarkali set" width="50">
+            <div class="ms-2">
+              <p class="mb-0">Red Anarkali set</p>
+              <small>₹2000</small>
+            </div>
+            <div class="input-group input-group-sm ms-2" style="width: 100px;">
+              <button class="btn btn-outline-secondary">-</button>
+              <input type="text" class="form-control text-center" value="2">
+              <button class="btn btn-outline-secondary">+</button>
+            </div>
+            <button class="btn btn-sm btn-danger ms-2">🗑</button>
+          </div>
+
+          <!-- Another Cart Item -->
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <img src="https://www.fabfunda.com/product-img/thumb/heavy-crepe-black-one-piece-dr-1737637734.jpeg" class="rounded" alt="One Piece Dress" width="50">
+            <div class="ms-2">
+              <p class="mb-0">One piece Dress</p>
+              <small>₹1000</small>
+            </div>
+            <div class="input-group input-group-sm ms-2" style="width: 100px;">
+              <button class="btn btn-outline-secondary">-</button>
+              <input type="text" class="form-control text-center" value="1">
+              <button class="btn btn-outline-secondary">+</button>
+            </div>
+            <button class="btn btn-sm btn-danger ms-2">🗑</button>
+          </div>
+
+          <!-- Total -->
+          <hr>
+          <div class="d-flex justify-content-between">
+            <h6>Total</h6>
+            <h6 class="fw-bold"></h6>
+          </div>
+          <button class="btn btn-cart w-100 mt-3">Buy Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
