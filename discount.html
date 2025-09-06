@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spin the Wheel - Discounts</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f8f9fa;
+      padding: 30px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .wheel-container {
+      position: relative;
+      margin: 0 auto;
+      width: 400px;
+      height: 400px;
+    }
+
+    .wheel {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 10px solid #333;
+      position: relative;
+      transition: transform 5s ease-out;
+    }
+
+    /* Pointer pointing downward */
+    .pointer {
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 30px solid red; /* pointing down */
+      margin: 0 auto;
+      position: relative;
+      top: 10px; /* adjust spacing */
+      z-index: 10;
+    }
+
+    .spin-btn {
+      margin-top: 20px;
+      padding: 10px 25px;
+      font-size: 18px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .spin-btn:hover {
+      background: #0056b3;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎉 Spin the Wheel & Win Discounts 🎉</h1>
+
+  <div class="pointer"></div>
+
+  <div class="wheel-container">
+    <canvas id="wheel" class="wheel"></canvas>
+  </div>
+
+  <button class="spin-btn" onclick="spinWheel()">Spin Now</button>
+
+  <p id="result"></p>
+
+  <script>
+    const canvas = document.getElementById("wheel");
+    const ctx = canvas.getContext("2d");
+
+    const discounts = ["10% OFF", "20% OFF", "30% OFF", "40% OFF", "50% OFF", "No Luck!"];
+    const colors = ["#FFDDC1", "#FFABAB", "#FFC3A0", "#D5AAFF", "#85E3FF", "#B9FBC0"];
+    const size = discounts.length;
+    const arc = (2 * Math.PI) / size;
+
+    canvas.width = 400;
+    canvas.height = 400;
+
+    function drawWheel() {
+      for (let i = 0; i < size; i++) {
+        const angle = i * arc;
+        ctx.beginPath();
+        ctx.fillStyle = colors[i];
+        ctx.moveTo(200, 200);
+        ctx.arc(200, 200, 200, angle, angle + arc);
+        ctx.lineTo(200, 200);
+        ctx.fill();
+
+        // Text
+        ctx.save();
+        ctx.translate(200, 200);
+        ctx.rotate(angle + arc / 2);
+        ctx.textAlign = "right";
+        ctx.fillStyle = "#000";
+        ctx.font = "16px Arial";
+        ctx.fillText(discounts[i], 180, 10);
+        ctx.restore();
+      }
+    }
+
+    drawWheel();
+
+    let spinning = false;
+
+    function spinWheel() {
+      if (spinning) return;
+      spinning = true;
+      const spinAngle = Math.random() * 360 + 1800; // multiple spins
+      const duration = 5000; // 5s
+      const start = performance.now();
+
+      function animate(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const angle = spinAngle * easeOut;
+
+        canvas.style.transform = `rotate(${angle}deg)`;
+
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          spinning = false;
+          const finalAngle = (angle % 360) * Math.PI / 180;
+          const winningIndex = size - 1 - Math.floor((finalAngle / (2 * Math.PI)) * size);
+          document.getElementById("result").textContent =
+            "🎁 You won: " + discounts[winningIndex];
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+  </script>
+</body>
+</html>
