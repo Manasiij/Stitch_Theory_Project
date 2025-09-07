@@ -40,9 +40,7 @@
       border-left: 20px solid transparent;
       border-right: 20px solid transparent;
       border-top: 30px solid red; /* pointing down */
-      margin: 0 auto;
-      position: relative;
-      top: 10px; /* adjust spacing */
+      margin: 10px auto;
       z-index: 10;
     }
 
@@ -58,7 +56,12 @@
       transition: background 0.3s;
     }
 
-    .spin-btn:hover {
+    .spin-btn:disabled {
+      background: gray;
+      cursor: not-allowed;
+    }
+
+    .spin-btn:hover:enabled {
       background: #0056b3;
     }
 
@@ -68,52 +71,88 @@
       font-weight: bold;
       color: green;
     }
+
+    #timer {
+      margin-top: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      color: red;
+    }
   </style>
 </head>
 <body>
 
-  <h1>🎉 Spin the Wheel & Win Discounts 🎉</h1>
+  <h1>🎡 Spin the Wheel & Win Discounts 🎉</h1>
 
+  <!-- Pointer -->
   <div class="pointer"></div>
 
+  <!-- Wheel Canvas -->
   <div class="wheel-container">
     <canvas id="wheel" class="wheel"></canvas>
   </div>
 
-  <button class="spin-btn" onclick="spinWheel()">Spin Now</button>
+  <!-- Spin Button -->
+  <button class="spin-btn" id="spinBtn" onclick="spinWheel()">Spin Now</button>
 
+  <!-- Result -->
   <p id="result"></p>
+  <p id="timer"></p>
 
+  <!-- Wheel Script -->
   <script>
+    // ---------------- CART FUNCTION ----------------
+    function addToCart(name, price) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      const existingItem = cart.find(item => item.name === name);
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({ name, price, quantity: 1 });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(name + " added to cart!");
+    }
+
+    // ---------------- WHEEL SCRIPT ----------------
     const canvas = document.getElementById("wheel");
     const ctx = canvas.getContext("2d");
 
-    const discounts = ["10% OFF", "20% OFF", "30% OFF", "40% OFF", "50% OFF", "No Luck!"];
+    const discounts = [
+      { text: "10% OFF", code: "DEAL10" },
+      { text: "20% OFF", code: "DEAL20" },
+      { text: "30% OFF", code: "DEAL30" },
+      { text: "40% OFF", code: "DEAL40" },
+      { text: "50% OFF", code: "DEAL50" },
+      { text: "No Luck!", code: "" }
+    ];
+
     const colors = ["#FFDDC1", "#FFABAB", "#FFC3A0", "#D5AAFF", "#85E3FF", "#B9FBC0"];
     const size = discounts.length;
     const arc = (2 * Math.PI) / size;
 
-    canvas.width = 400;
-    canvas.height = 400;
+    canvas.width = 350;
+    canvas.height = 350;
 
     function drawWheel() {
       for (let i = 0; i < size; i++) {
         const angle = i * arc;
         ctx.beginPath();
         ctx.fillStyle = colors[i];
-        ctx.moveTo(200, 200);
-        ctx.arc(200, 200, 200, angle, angle + arc);
-        ctx.lineTo(200, 200);
+        ctx.moveTo(175, 175);
+        ctx.arc(175, 175, 175, angle, angle + arc);
+        ctx.lineTo(175, 175);
         ctx.fill();
 
-        // Text
         ctx.save();
-        ctx.translate(200, 200);
+        ctx.translate(175, 175);
         ctx.rotate(angle + arc / 2);
         ctx.textAlign = "right";
         ctx.fillStyle = "#000";
-        ctx.font = "16px Arial";
-        ctx.fillText(discounts[i], 180, 10);
+        ctx.font = "14px Arial";
+        ctx.fillText(discounts[i].text, 160, 10);
         ctx.restore();
       }
     }
@@ -121,12 +160,15 @@
     drawWheel();
 
     let spinning = false;
+    let cooldown = false;
 
     function spinWheel() {
-      if (spinning) return;
+      if (spinning || cooldown) return;
       spinning = true;
-      const spinAngle = Math.random() * 360 + 1800; // multiple spins
-      const duration = 5000; // 5s
+      document.getElementById("result").textContent = "";
+
+      const spinAngle = Math.random() * 360 + 1800;
+      const duration = 5000;
       const start = performance.now();
 
       function animate(now) {
@@ -143,13 +185,59 @@
           spinning = false;
           const finalAngle = (angle % 360) * Math.PI / 180;
           const winningIndex = size - 1 - Math.floor((finalAngle / (2 * Math.PI)) * size);
-          document.getElementById("result").textContent =
-            "🎁 You won: " + discounts[winningIndex];
+
+          const prize = discounts[winningIndex];
+          setTimeout(() => {
+            document.getElementById("result").textContent =
+              prize.text === "No Luck!"
+                ? "😢 Sorry! " + prize.text
+                : "🎁 You won: " + prize.text + " | Coupon Code: " + prize.code;
+
+            startCooldown(24 * 60 * 60); // 24 hour cooldown
+          }, 300);
         }
       }
 
       requestAnimationFrame(animate);
     }
+
+    function startCooldown(seconds) {
+      cooldown = true;
+      const spinBtn = document.getElementById("spinBtn");
+      const timerEl = document.getElementById("timer");
+
+      const expiry = Date.now() + seconds * 1000;
+      localStorage.setItem("wheelExpiry", expiry);
+
+      spinBtn.disabled = true;
+
+      const interval = setInterval(() => {
+        const now = Date.now();
+        const distance = expiry - now;
+
+        if (distance <= 0) {
+          clearInterval(interval);
+          cooldown = false;
+          spinBtn.disabled = false;
+          timerEl.textContent = "";
+          localStorage.removeItem("wheelExpiry");
+        } else {
+          const hrs = Math.floor((distance / (1000 * 60 * 60)));
+          const mins = Math.floor((distance / (1000 * 60)) % 60);
+          const secs = Math.floor((distance / 1000) % 60);
+          timerEl.textContent = `⏳ Try again in ${hrs}h ${mins}m ${secs}s`;
+        }
+      }, 1000);
+    }
+
+    // Restore cooldown if it exists
+    window.onload = () => {
+      const expiry = localStorage.getItem("wheelExpiry");
+      if (expiry && Date.now() < expiry) {
+        const secondsLeft = Math.floor((expiry - Date.now()) / 1000);
+        startCooldown(secondsLeft);
+      }
+    };
   </script>
 </body>
 </html>

@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Top Deals - Clothing Store</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Deals - Clothing Store</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet">
 
-  <style>
+    <style>
     /* Navbar */
     .navbar {
       background-color: #222;
@@ -87,88 +89,152 @@
       box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3);
     }
   </style>
-</head>
-<body class="bg-light">
+  </head>
+  <body class="bg-light">
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg">
-    <div class="container">
-      <a class="navbar-brand" href="#">Stitch Theory</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-          <li class="nav-item">
-            <a class="nav-link btn btn-danger text-white px-3 ms-2" data-bs-toggle="modal" data-bs-target="#discountModal">
-              🎡 Discounts
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <img src="/images/ST logo.jpg" alt="logo" width="150" height="50"
+          class=" border border-2 border-light">
+        <a class="navbar-brand fs-4" href="#"></a>
+        <button class="navbar-toggler"
+          type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarScroll"> <span
+            class="navbar-toggler-icon"></span> </button>
 
- <!-- Top Deals Section -->
-<div class="container text-center py-5">
-  <h1 class="mb-4"><b>Top Deals</b></h1>
-  <p>Check out our best discounts and spin to win more!</p>
+        <!-- Search bar -->
+        <form class="d-flex mx-auto" style="width: 400px;">
+          <input class="form-control me-2" type="search" placeholder="Search"
+            aria-label="Search">
+          <button class="btn btn-outline-light" type="submit">Search</button>
+        </form>
 
-  <div class="row g-4 mb-5">
-    <!-- Product 1 -->
-    <div class="col-md-4">
-      <img src="images/Summer Dress.jpg" alt="Deal 1" class="deal-img">
-      <h5 class="mt-2">Summer Dress</h5>
-      <p><strong>$49.99</strong> <del>$79.99</del></p>
-      <button class="btn btn-success" onclick="addToCart('Summer Dress', 49.99)">Add to Cart</button>
-    </div>
+        <!-- Icons -->
+        <li class="nav-item ms-3">
+          <a class="nav-link" href="#">
+            <img src="/Images/istockphoto-2007184709-1024x1024.jpg" width="22"
+              alt="wishlist">
+          </a>
+        </li>
+        <li class="nav-item ms-2">
+          <a class="nav-link" href="#">
+            <img src="/Images/istockphoto-1160747149-1024x1024.jpg" width="22"
+              alt="notification">
+          </a>
+        </li>
 
-    <!-- Product 2 -->
-    <div class="col-md-4">
-      <img src="images/casual shirt.jpg" alt="Deal 2" class="deal-img">
-      <h5 class="mt-2">Casual Shirt</h5>
-      <p><strong>$29.99</strong> <del>$59.99</del></p>
-      <button class="btn btn-success" onclick="addToCart('Casual Shirt', 29.99)">Add to Cart</button>
-    </div>
+        <li class="nav-item ms-1">
+          <a class="nav-link" href="#">
+            <img src="/Images/istockphoto-1300845620-1024x1024.jpg" width="22"
+              alt="account">
+          </a>
+        </li>
 
-    <!-- Product 3 -->
-    <div class="col-md-4">
-      <img src="images/demin jeans.jpg" alt="Deal 3" class="deal-img">
-      <h5 class="mt-2">Denim Jeans</h5>
-      <p><strong>$39.99</strong> <del>$69.99</del></p>
-      <button class="btn btn-success" onclick="addToCart('Denim Jeans', 39.99)">Add to Cart</button>
-    </div>
-  </div>
-</div>
-
-
-  <!-- Modal for Discount Wheel -->
-  <div class="modal fade" id="discountModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content p-4 text-center">
-        <h2>🎉 Spin the Wheel & Win Discounts 🎉</h2>
-        <div class="pointer"></div>
-        <div class="wheel-container">
-          <canvas id="wheel" class="wheel"></canvas>
-        </div>
-        <button class="spin-btn" id="spinBtn" onclick="spinWheel()">Spin Now</button>
-        <p id="result"></p>
-        <p id="timer"></p>
-        <div class="mt-3">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link active"
+                href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#"
+                data-bs-toggle="dropdown">Gallery</a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">Photos</a></li>
+                <li><a class="dropdown-item" href="#">Videos</a></li>
+              </ul>
+              <li class="nav-item">
+                <a class="nav-link" href="cart.html">🛒 Cart</a>
+              </li>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            <li class="nav-item">
+              <a class="nav-link btn btn-danger text-white px-3 ms-2"
+                data-bs-toggle="modal" data-bs-target="#discountModal">
+                🎡 Discounts
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
+    </nav>
+
+    <!-- Top Deals Section -->
+    <div class="container text-center py-5">
+      <h1 class="mb-4"><b>Top Deals</b></h1>
+      <p>Check out our best discounts and spin to win more!</p>
+
+      <div class="row g-4 mb-5">
+        <!-- Product 1 -->
+        <div class="col-md-4">
+          <img src="images/Summer Dress.jpg" alt="Deal 1" class="deal-img">
+          <h5 class="mt-2">Summer Dress</h5>
+          <p><strong>4999</strong> <del>7999</del></p>
+          <button class="btn btn-success"
+            onclick="addToCart('Summer Dress', 4999)">Add to Cart</button>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="col-md-4">
+          <img src="images/casual shirt.jpg" alt="Deal 2" class="deal-img">
+          <h5 class="mt-2">Casual Shirt</h5>
+          <p><strong>2500</strong> <del>5000</del></p>
+          <button class="btn btn-success"
+            onclick="addToCart('Casual Shirt', 2500)">Add to Cart</button>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="col-md-4">
+          <img src="images/demin jeans.jpg" alt="Deal 3" class="deal-img">
+          <h5 class="mt-2">Denim Jeans</h5>
+          <p><strong>3999</strong> <del>6999</del></p>
+          <button class="btn btn-success"
+            onclick="addToCart('Denim Jeans', 3999)">Add to Cart</button>
+        </div>
+      </div>
     </div>
-  </div>
 
-<!-- 🔹 Footer -->
+    <!-- Modal for Discount Wheel -->
+    <div class="modal fade" id="discountModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content p-4 text-center">
+          <h2>🎉 Spin the Wheel & Win Discounts 🎉</h2>
+          <div class="pointer"></div>
+          <div class="wheel-container">
+            <canvas id="wheel" class="wheel"></canvas>
+          </div>
+          <button class="spin-btn" id="spinBtn" onclick="spinWheel()">Spin
+            Now</button>
+          <p id="result"></p>
+          <p id="timer"></p>
+          <div class="mt-3">
+            <button type="button" class="btn btn-secondary"
+              data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <!-- 🔹 Footer -->
 
-  <!-- Wheel Script -->
-  <script>
+    <!-- Wheel Script + Cart Script -->
+    <script>
+    // ---------------- CART FUNCTION ----------------
+    function addToCart(name, price) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      const existingItem = cart.find(item => item.name === name);
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({ name, price, quantity: 1 });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(name + " added to cart!");
+    }
+
+    // ---------------- WHEEL SCRIPT ----------------
     const canvas = document.getElementById("wheel");
     const ctx = canvas.getContext("2d");
 
@@ -291,9 +357,10 @@
       }
     };
   </script>
-</body>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <footer class="bg-dark text-white text-center py-3">
-  <p>&copy; 2025 ClothingStore | All Rights Reserved</p>
-</footer>
+    <p>&copy; 2025 ClothingStore | All Rights Reserved</p>
+  </footer>
 </html>
