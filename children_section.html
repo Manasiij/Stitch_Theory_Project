@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Children's Collection</title>
+        <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f5f5f5; color: #111; }
+    .navbar { background: #111; padding: 15px; display: flex; justify-content: space-between; align-items: center; color: white; }
+    .navbar a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; }
+    .navbar a:hover { text-decoration: underline; }
+    section { padding: 40px; }
+    h2 { text-align: center; margin-bottom: 30px; color: #111; }
+    .products { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+    .product { border: 1px solid #ddd; border-radius: 10px; width: 220px; padding: 15px; text-align: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .product img { width: 100%; height: 250px; object-fit: cover; border-radius: 10px; }
+    .product h3 { margin: 10px 0; }
+    .price { color: #000; font-weight: bold; }
+    .quantity { display: flex; justify-content: center; align-items: center; margin: 10px 0; gap: 10px; }
+    .quantity button { padding: 5px 10px; background: #000; border: none; color: white; cursor: pointer; border-radius: 5px; }
+    .btn { padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; cursor: pointer; }
+    .btn-add { background: #000; color: white; }
+    .btn-shop { background: #444; color: white; }
+    .btn:hover { opacity: 0.8; }
+  </style>
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="logo">🛍️ Clothing Store</div>
+            <div>
+                <a href="index.html">Home</a>
+                <a href="women.html">Women</a>
+                <a href="men.html">Men</a>
+                <a href="cart.html">Cart 🛒</a>
+            </div>
+        </div>
+
+        <section>
+            <h2>🧒 Children's Collection</h2>
+            <div class="products">
+                <div class="product">
+                    <img src="https://via.placeholder.com/250x300"
+                        alt="Kids T-shirt">
+                    <h3>Cartoon T-Shirt</h3>
+                    <p class="price">₹499</p>
+                    <div class="quantity">
+                        <button onclick="changeQty('ctshirt', -1)">-</button>
+                        <span id="qty-ctshirt">1</span>
+                        <button onclick="changeQty('ctshirt', 1)">+</button>
+                    </div>
+                    <button class="btn btn-add"
+                        onclick="addToCart('Cartoon T-Shirt', 499, 'ctshirt')">Add
+                        to Cart</button>
+                    <button class="btn btn-shop" onclick="goToCart()">Shop
+                        Now</button>
+                </div>
+
+                <div class="product">
+                    <img src="https://via.placeholder.com/250x300"
+                        alt="Kids Dress">
+                    <h3>Kids Dress</h3>
+                    <p class="price">₹899</p>
+                    <div class="quantity">
+                        <button onclick="changeQty('cdress', -1)">-</button>
+                        <span id="qty-cdress">1</span>
+                        <button onclick="changeQty('cdress', 1)">+</button>
+                    </div>
+                    <button class="btn btn-add"
+                        onclick="addToCart('Kids Dress', 899, 'cdress')">Add to
+                        Cart</button>
+                    <button class="btn btn-shop" onclick="goToCart()">Shop
+                        Now</button>
+                </div>
+
+                <div class="product">
+                    <img src="https://via.placeholder.com/250x300"
+                        alt="Kids Shoes">
+                    <h3>Sports Shoes</h3>
+                    <p class="price">₹1,199</p>
+                    <div class="quantity">
+                        <button onclick="changeQty('cshoes', -1)">-</button>
+                        <span id="qty-cshoes">1</span>
+                        <button onclick="changeQty('cshoes', 1)">+</button>
+                    </div>
+                    <button class="btn btn-add"
+                        onclick="addToCart('Sports Shoes', 1199, 'cshoes')">Add
+                        to Cart</button>
+                    <button class="btn btn-shop" onclick="goToCart()">Shop
+                        Now</button>
+                </div>
+            </div>
+        </section>
+
+        <script>
+    function changeQty(id, change) {
+      let qtyEl = document.getElementById("qty-" + id);
+      let qty = parseInt(qtyEl.textContent);
+      qty = Math.max(1, qty + change);
+      qtyEl.textContent = qty;
+    }
+
+    function addToCart(name, price, id) {
+      let qty = parseInt(document.getElementById("qty-" + id).textContent);
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const existingItem = cart.find(item => item.name === name);
+      if (existingItem) {
+        existingItem.quantity += qty;
+      } else {
+        cart.push({ name, price, quantity: qty });
+      }
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(`${qty} x ${name} added to cart!`);
+    }
+
+    function goToCart() {
+      window.location.href = "cart.html";
+    }
+  </script>
+    </body>
+</html>
