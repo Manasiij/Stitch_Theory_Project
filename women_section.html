@@ -8,9 +8,10 @@
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      background: #f5f5f5;
+      background: #f8f8f8;
       color: #111;
     }
+    
     .navbar {
       background: #111;
       padding: 15px;
@@ -18,88 +19,276 @@
       justify-content: space-between;
       align-items: center;
       color: white;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
+    
     .navbar a {
       color: white;
       text-decoration: none;
       margin: 0 15px;
       font-weight: bold;
     }
+    
     .navbar a:hover {
       text-decoration: underline;
     }
-    section {
+    
+    .main-container {
+      display: flex;
+      min-height: calc(100vh - 70px);
+    }
+    
+    .sidebar {
+      width: 280px;
+      background: white;
+      padding: 30px 25px;
+      border-right: 2px solid #e5e5e5;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+    }
+    
+    .sidebar h3 {
+      color: #111;
+      margin-bottom: 20px;
+      font-size: 18px;
+      border-bottom: 2px solid #111;
+      padding-bottom: 8px;
+    }
+    
+    .filter-group {
+      margin-bottom: 25px;
+    }
+    
+    .filter-group h4 {
+      color: #333;
+      margin-bottom: 12px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .filter-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .filter-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      padding: 5px;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+    }
+    
+    .filter-option:hover {
+      background-color: #f5f5f5;
+    }
+    
+    .filter-option input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: #111;
+    }
+    
+    .filter-option label {
+      cursor: pointer;
+      color: #555;
+      font-size: 14px;
+    }
+    
+    .price-range {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .price-inputs {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    
+    .price-inputs input {
+      width: 80px;
+      padding: 6px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+    
+    .clear-filters {
+      background: #666;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    
+    .clear-filters:hover {
+      background: #555;
+    }
+    
+    .content {
+      flex: 1;
       padding: 40px;
     }
-    h2 {
-      text-align: center;
-      margin-bottom: 30px;
-      color: #111;
-    }
-    .products {
+    
+    .content-header {
       display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
     }
+    
+    .content-header h2 {
+      color: #111;
+      margin: 0;
+    }
+    
+    .results-count {
+      color: #666;
+      font-size: 14px;
+    }
+    
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 25px;
+    }
+    
     .product {
-      border: 1px solid #ddd;
+      border: 1px solid #e0e0e0;
       border-radius: 10px;
-      width: 220px;
       padding: 15px;
       text-align: center;
-      background: #fff;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
+    
+    .product:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+    }
+    
     .product img {
       width: 100%;
       height: 250px;
       object-fit: cover;
-      border-radius: 10px;
+      border-radius: 8px;
+      margin-bottom: 10px;
     }
+    
     .product h3 {
       margin: 10px 0;
+      color: #111;
+      font-size: 16px;
     }
+    
+    .product-category {
+      color: #777;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 5px;
+    }
+    
     .price {
-      color: #000;
+      color: #111;
       font-weight: bold;
+      font-size: 18px;
+      margin: 10px 0;
     }
+    
     .quantity {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 10px 0;
+      margin: 15px 0;
       gap: 10px;
     }
+    
     .quantity button {
-      padding: 5px 10px;
-      background: #000;
+      padding: 8px 12px;
+      background: #111;
       border: none;
       color: white;
       cursor: pointer;
-      border-radius: 5px;
+      border-radius: 4px;
+      font-weight: bold;
     }
+    
+    .quantity button:hover {
+      background: #333;
+    }
+    
     .quantity span {
       font-size: 16px;
       font-weight: bold;
+      min-width: 20px;
     }
+    
     .btn {
-      padding: 10px 20px;
+      padding: 12px 20px;
       margin: 5px;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
       cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s;
     }
+    
     .btn-add {
-      background: #000;
+      background: #111;
       color: white;
     }
+    
+    .btn-add:hover {
+      background: #333;
+    }
+    
     .btn-shop {
-      background: #444;
+      background: #666;
       color: white;
     }
-    .btn:hover {
-      opacity: 0.8;
+    
+    .btn-shop:hover {
+      background: #555;
+    }
+    
+    .no-results {
+      text-align: center;
+      color: #666;
+      font-size: 16px;
+      margin-top: 50px;
+    }
+    
+    @media (max-width: 768px) {
+      .main-container {
+        flex-direction: column;
+      }
+      
+      .sidebar {
+        width: 100%;
+        padding: 20px;
+      }
+      
+      .content {
+        padding: 20px;
+      }
+      
+      .products {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 15px;
+      }
     }
   </style>
 </head>
@@ -114,49 +303,197 @@
     </div>
   </div>
 
-  <section>
-    <h2>👗 Women's Collection</h2>
-    <div class="products">
-      <div class="product">
-        <img src="https://via.placeholder.com/250x300" alt="Dress">
-        <h3>Floral Summer Dress</h3>
-        <p class="price">₹1,499</p>
-        <div class="quantity">
-          <button onclick="changeQty('dress', -1)">-</button>
-          <span id="qty-dress">1</span>
-          <button onclick="changeQty('dress', 1)">+</button>
+  <div class="main-container">
+    <div class="sidebar">
+      <h3>Filter Products</h3>
+      
+      <div class="filter-group">
+        <h4>Category</h4>
+        <div class="filter-options">
+          <div class="filter-option">
+            <input type="checkbox" id="dress" value="dress" onchange="filterProducts()">
+            <label for="dress">Dresses</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="kurti" value="kurti" onchange="filterProducts()">
+            <label for="kurti">Kurtis</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="jeans" value="jeans" onchange="filterProducts()">
+            <label for="jeans">Jeans</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="top" value="top" onchange="filterProducts()">
+            <label for="top">Tops</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="ethnic" value="ethnic" onchange="filterProducts()">
+            <label for="ethnic">Ethnic Wear</label>
+          </div>
         </div>
-        <button class="btn btn-add" onclick="addToCart('Floral Summer Dress', 1499, 'dress')">Add to Cart</button>
-        <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
       </div>
-
-      <div class="product">
-        <img src="https://via.placeholder.com/250x300" alt="Kurti">
-        <h3>Designer Kurti</h3>
-        <p class="price">₹999</p>
-        <div class="quantity">
-          <button onclick="changeQty('kurti', -1)">-</button>
-          <span id="qty-kurti">1</span>
-          <button onclick="changeQty('kurti', 1)">+</button>
+      
+      <div class="filter-group">
+        <h4>Price Range</h4>
+        <div class="price-range">
+          <div class="price-inputs">
+            <input type="number" id="minPrice" placeholder="Min" min="0" onchange="filterProducts()">
+            <span>-</span>
+            <input type="number" id="maxPrice" placeholder="Max" min="0" onchange="filterProducts()">
+          </div>
         </div>
-        <button class="btn btn-add" onclick="addToCart('Designer Kurti', 999, 'kurti')">Add to Cart</button>
-        <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
       </div>
-
-      <div class="product">
-        <img src="https://via.placeholder.com/250x300" alt="Jeans">
-        <h3>High Waist Jeans</h3>
-        <p class="price">₹1,799</p>
-        <div class="quantity">
-          <button onclick="changeQty('jeans', -1)">-</button>
-          <span id="qty-jeans">1</span>
-          <button onclick="changeQty('jeans', 1)">+</button>
+      
+      <div class="filter-group">
+        <h4>Color</h4>
+        <div class="filter-options">
+          <div class="filter-option">
+            <input type="checkbox" id="black" value="black" onchange="filterProducts()">
+            <label for="black">Black</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="white" value="white" onchange="filterProducts()">
+            <label for="white">White</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="gray" value="gray" onchange="filterProducts()">
+            <label for="gray">Gray</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="floral" value="floral" onchange="filterProducts()">
+            <label for="floral">Floral</label>
+          </div>
         </div>
-        <button class="btn btn-add" onclick="addToCart('High Waist Jeans', 1799, 'jeans')">Add to Cart</button>
-        <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
+      </div>
+      
+      <button class="clear-filters" onclick="clearAllFilters()">Clear All Filters</button>
+    </div>
+
+    <div class="content">
+      <div class="content-header">
+        <h2> Women's Collection</h2>
+        <div class="results-count" id="resultsCount">Showing all products</div>
+      </div>
+      
+      <div class="products" id="productsContainer">
+        <div class="product" data-category="dress" data-price="1499" data-color="floral">
+          <div class="product-category">Dress</div>
+          <img src="images/summer_dress_floral.avif" alt="Floral Summer Dress">
+          <h3>Floral Summer Dress</h3>
+          <p class="price">₹1,499</p>
+          <div class="quantity">
+            <button onclick="changeQty('dress1', -1)">-</button>
+            <span id="qty-dress1">1</span>
+            <button onclick="changeQty('dress1', 1)">+</button>
+          </div>
+          <button class="btn btn-add" onclick="addToCart('Floral Summer Dress', 1499, 'dress1')">Add to Cart</button>
+          <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
+        </div>
+
+        <div class="product" data-category="kurti" data-price="999" data-color="black">
+          <div class="product-category">Ethnic</div>
+          <img src="images/kurti_black.avif" alt="Designer Kurti">
+          <h3>Designer Kurti</h3>
+          <p class="price">₹999</p>
+          <div class="quantity">
+            <button onclick="changeQty('kurti1', -1)">-</button>
+            <span id="qty-kurti1">1</span>
+            <button onclick="changeQty('kurti1', 1)">+</button>
+          </div>
+          <button class="btn btn-add" onclick="addToCart('Designer Kurti', 999, 'kurti1')">Add to Cart</button>
+          <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
+        </div>
+
+        <div class="product" data-category="jeans" data-price="1799" data-color="black">
+          <div class="product-category">Bottom</div>
+          <img src="images/jeans_black.avif" alt="High Waist Jeans">
+          <h3>High Waist Jeans</h3>
+          <p class="price">₹1,799</p>
+          <div class="quantity">
+            <button onclick="changeQty('jeans1', -1)">-</button>
+            <span id="qty-jeans1">1</span>
+            <button onclick="changeQty('jeans1', 1)">+</button>
+          </div>
+          <button class="btn btn-add" onclick="addToCart('High Waist Jeans', 1799, 'jeans1')">Add to Cart</button>
+          <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
+        </div>
+
+        <div class="product" data-category="top" data-price="799" data-color="white">
+          <div class="product-category">Top</div>
+          <img src="images/top_white.avif" alt="Casual White Top">
+          <h3>Casual White Top</h3>
+          <p class="price">₹799</p>
+          <div class="quantity">
+            <button onclick="changeQty('top1', -1)">-</button>
+            <span id="qty-top1">1</span>
+            <button onclick="changeQty('top1', 1)">+</button>
+          </div>
+          <button class="btn btn-add" onclick="addToCart('Casual White Top', 799, 'top1')">Add to Cart</button>
+          <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
+        </div>
+
+        <div class="product" data-category="dress" data-price="2199" data-color="black">
+          <div class="product-category">Dress</div>
+          <img src="images/black_dress.avif" alt="Elegant Black Dress">
+          <h3>Elegant Black Dress</h3>
+          <p class="price">₹2,199</p>
+          <div class="quantity">
+            <button onclick="changeQty('dress2', -1)">-</button>
+            <span id="qty-dress2">1</span>
+            <button onclick="changeQty('dress2', 1)">+</button>
+          </div>
+          <button class="btn btn-add" onclick="addToCart('Elegant Black Dress', 2199, 'dress2')">Add to Cart</button>
+          <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
+        </div>
+
+        <div class="product" data-category="ethnic" data-price="1299" data-color="floral">
+          <div class="product-category">Ethnic</div>
+          <img src="images/floral_kurti.avif" alt="Floral Kurta Set">
+          <h3>Floral Kurta Set</h3>
+          <p class="price">₹1,299</p>
+          <div class="quantity">
+            <button onclick="changeQty('ethnic1', -1)">-</button>
+            <span id="qty-ethnic1">1</span>
+            <button onclick="changeQty('ethnic1', 1)">+</button>
+          </div>
+          <button class="btn btn-add" onclick="addToCart('Floral Kurta Set', 1299, 'ethnic1')">Add to Cart</button>
+          <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
+        </div>
+
+        <div class="product" data-category="jeans" data-price="1599" data-color="gray">
+          <div class="product-category">Bottom</div>
+          <img src="images/jeans_grey.avif" alt="Gray Skinny Jeans">
+          <h3>Gray Skinny Jeans</h3>
+          <p class="price">₹1,599</p>
+          <div class="quantity">
+            <button onclick="changeQty('jeans2', -1)">-</button>
+            <span id="qty-jeans2">1</span>
+            <button onclick="changeQty('jeans2', 1)">+</button>
+          </div>
+          <button class="btn btn-add" onclick="addToCart('Gray Skinny Jeans', 1599, 'jeans2')">Add to Cart</button>
+          <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
+        </div>
+
+        <div class="product" data-category="top" data-price="899" data-color="black">
+          <div class="product-category">Top</div>
+          <img src="images/top_black.avif" alt="Stylish Black Top">
+          <h3>Stylish Black Top</h3>
+          <p class="price">₹899</p>
+          <div class="quantity">
+            <button onclick="changeQty('top2', -1)">-</button>
+            <span id="qty-top2">1</span>
+            <button onclick="changeQty('top2', 1)">+</button>
+          </div>
+          <button class="btn btn-add" onclick="addToCart('Stylish Black Top', 899, 'top2')">Add to Cart</button>
+          <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
+        </div>
+      </div>
+      
+      <div class="no-results" id="noResults" style="display: none;">
+        No products match your current filters. Try adjusting your selection.
       </div>
     </div>
-  </section>
+  </div>
 
   <script>
     function changeQty(id, change) {
@@ -184,6 +521,92 @@
     function goToCart() {
       window.location.href = "cart.html";
     }
+
+    function filterProducts() {
+      const products = document.querySelectorAll('.product');
+      const productsContainer = document.getElementById('productsContainer');
+      const noResults = document.getElementById('noResults');
+      const resultsCount = document.getElementById('resultsCount');
+      
+      // Get selected filters
+      const selectedCategories = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+        .filter(cb => ['dress', 'kurti', 'jeans', 'top', 'ethnic'].includes(cb.value))
+        .map(cb => cb.value);
+      
+      const selectedColors = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+        .filter(cb => ['black', 'white', 'gray', 'floral'].includes(cb.value))
+        .map(cb => cb.value);
+      
+      const minPrice = document.getElementById('minPrice').value;
+      const maxPrice = document.getElementById('maxPrice').value;
+      
+      let visibleCount = 0;
+      
+      products.forEach(product => {
+        let shouldShow = true;
+        
+        // Category filter
+        if (selectedCategories.length > 0) {
+          const productCategory = product.getAttribute('data-category');
+          if (!selectedCategories.includes(productCategory)) {
+            shouldShow = false;
+          }
+        }
+        
+        // Color filter
+        if (selectedColors.length > 0 && shouldShow) {
+          const productColor = product.getAttribute('data-color');
+          if (!selectedColors.includes(productColor)) {
+            shouldShow = false;
+          }
+        }
+        
+        // Price filter
+        if ((minPrice || maxPrice) && shouldShow) {
+          const productPrice = parseInt(product.getAttribute('data-price'));
+          if (minPrice && productPrice < parseInt(minPrice)) {
+            shouldShow = false;
+          }
+          if (maxPrice && productPrice > parseInt(maxPrice)) {
+            shouldShow = false;
+          }
+        }
+        
+        product.style.display = shouldShow ? 'block' : 'none';
+        if (shouldShow) visibleCount++;
+      });
+      
+      // Update results count
+      if (visibleCount === 0) {
+        noResults.style.display = 'block';
+        productsContainer.style.display = 'none';
+        resultsCount.textContent = 'No products found';
+      } else {
+        noResults.style.display = 'none';
+        productsContainer.style.display = 'grid';
+        resultsCount.textContent = `Showing ${visibleCount} product${visibleCount !== 1 ? 's' : ''}`;
+      }
+    }
+
+    function clearAllFilters() {
+      // Clear all checkboxes
+      document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        cb.checked = false;
+      });
+      
+      // Clear price inputs
+      document.getElementById('minPrice').value = '';
+      document.getElementById('maxPrice').value = '';
+      
+      // Reset display
+      filterProducts();
+      document.getElementById('resultsCount').textContent = 'Showing all products';
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      filterProducts();
+    });
   </script>
 </body>
 </html>
