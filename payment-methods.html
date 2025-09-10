@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wishlist - My Account</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f1f1f1;
+      color: #212529;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      min-height: 100vh;
+      background-color: #111;
+      border-right: 1px solid #222;
+    }
+
+    .sidebar h6 {
+      color: #aaa;
+      font-size: 12px;
+      margin-top: 10px;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 12px;
+      color: #ddd;
+      text-decoration: none;
+      border-radius: 6px;
+      margin-bottom: 5px;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+
+    .sidebar a.active,
+    .sidebar a:hover {
+      background-color: #fff;
+      color: #000;
+    }
+
+    /* Content */
+    .content-area {
+      padding: 30px;
+      background-color: #f1f1f1;
+    }
+
+    .form-section {
+      background: #fff;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .payment-card {
+      background: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 sidebar p-3">
+                <h6 class="text-uppercase">Account</h6>
+                <a href="profile.html" >Profile</a>
+                <a href="wishlist.html">Wishlist</a>
+                <a href="orders.html">Orders</a>
+                <a href="addresses.html">Addresses</a>
+                <a href="payment-methods.html"class="active">Payment Methods</a>
+                <a href="discount.html">Discount</a>
+                <a href="logout.html">Logout</a>
+                <hr class="border-secondary">
+                <h6 class="text-uppercase">Legal</h6>
+                <a href="term_of_use.html">Terms of Use</a>
+                <a href="privacy_center.html">Privacy Center</a>
+            </div>
+
+
+          <!-- Content -->
+          <div class="col-md-9 col-lg-10 content-area">
+            <div class="form-section">
+              <h4 class="mb-4">My Payment Methods</h4>
+
+              <div class="payment-card">
+                <h6>Visa Credit Card</h6>
+                <p>**** **** **** 1234 <br> Exp: 08/27</p>
+                <button class="btn btn-sm btn-dark">Edit</button>
+              </div>
+
+              <div id="upiArea">
+                <!-- Displayed if a UPI id exists -->
+                <div id="upiCard" class="payment-card" style="display:none;">
+                  <h6>UPI Payment</h6>
+                  <p id="upiText">.......@upi</p>
+                  <div class="mt-2">
+                    <button id="editUpiBtn" class="btn btn-sm btn-outline-dark">Edit</button>
+                    <button id="removeUpiBtn" class="btn btn-sm btn-dark">Remove</button>
+                  </div>
+                </div>
+
+                <!-- If no UPI stored, show add form -->
+                <div id="upiFormCard" class="payment-card">
+                  <h6>Add UPI ID</h6>
+                  <p class="text-muted">Enter your UPI ID (example: name@bank or mobile@upi)</p>
+                  <div class="d-flex gap-2">
+                    <input id="upiInput" type="text" class="form-control form-control-sm"
+                      placeholder="eg. username@bank" />
+                    <button id="saveUpiBtn" class="btn btn-sm btn-dark">Save</button>
+                  </div>
+                  <small id="upiError" class="text-danger" style="display:none;"></small>
+                </div>
+              </div>
+
+              <script>
+                /*
+                  UPI validation regex:
+                  - local part: letters, digits, dot, dash, underscore (2-256 chars)
+                  - domain: letters only (2-64), typical UPI handles like @okhdfcbank @upi or custom handles
+                  This pattern is broad enough for most UPI IDs in common use.
+                */
+                function validateUpi(upi) {
+                  if (!upi || typeof upi !== 'string') return false;
+                  upi = upi.trim();
+                  const pattern = /^[a-zA-Z0-9.\-_]{2,256}@[a-zA-Z]{2,64}$/;
+                  return pattern.test(upi);
+                }
+
+                // DOM refs
+                const upiInput = document.getElementById('upiInput');
+                const saveUpiBtn = document.getElementById('saveUpiBtn');
+                const upiError = document.getElementById('upiError');
+
+                const upiCard = document.getElementById('upiCard');
+                const upiText = document.getElementById('upiText');
+                const upiFormCard = document.getElementById('upiFormCard');
+                const editUpiBtn = document.getElementById('editUpiBtn');
+                const removeUpiBtn = document.getElementById('removeUpiBtn');
+
+                function showUpi(upi) {
+                  if (upi) {
+                    // Display card with existing UPI
+                    upiText.textContent = upi;
+                    upiCard.style.display = 'block';
+                    upiFormCard.style.display = 'none';
+                  } else {
+                    // Show form to add UPI
+                    upiCard.style.display = 'none';
+                    upiFormCard.style.display = 'block';
+                  }
+                }
+
+                // Save to localStorage and update UI
+                function saveUpi() {
+                  const upi = upiInput.value.trim();
+                  if (!validateUpi(upi)) {
+                    upiError.style.display = 'block';
+                    upiError.textContent = 'Invalid UPI format. Use something like username@bank or 99999xxxxx@upi';
+                    return;
+                  }
+                  upiError.style.display = 'none';
+                  localStorage.setItem('user_upi', upi);
+                  showUpi(upi);
+                  alert('UPI saved successfully.');
+                }
+
+                // Remove from storage and update UI
+                function removeUpi() {
+                  if (!confirm('Are you sure you want to remove this UPI method?')) return;
+                  localStorage.removeItem('user_upi');
+                  upiInput.value = '';
+                  showUpi(null);
+                  alert('UPI removed.');
+                }
+
+                // Edit existing UPI -> populate form and show
+                function editUpi() {
+                  const stored = localStorage.getItem('user_upi') || '';
+                  upiInput.value = stored;
+                  upiError.style.display = 'none';
+                  upiCard.style.display = 'none';
+                  upiFormCard.style.display = 'block';
+                  upiInput.focus();
+                }
+
+                // Wire up events
+                saveUpiBtn.addEventListener('click', saveUpi);
+                removeUpiBtn.addEventListener('click', removeUpi);
+                editUpiBtn.addEventListener('click', editUpi);
+
+                // On load: restore UPI if present
+                document.addEventListener('DOMContentLoaded', () => {
+                  const stored = localStorage.getItem('user_upi');
+                  if (stored) {
+                    showUpi(stored);
+                  } else {
+                    showUpi(null);
+                  }
+                });
+              </script>
+            </div>
+          </div>
+        </div>
+      </div>
+</body>
+
+</html>
