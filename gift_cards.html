@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gift Cards - Stitch Theory</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top shadow-sm bg-white">
+    <div class="container-fluid">
+      <img src="Images/ST logo.jpg" alt="logo" width="150" height="50" class="border border-2 border-light" />
+      <a class="navbar-brand fs-4" href="index.html"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Search bar -->
+      <form class="d-flex mx-auto" style="width: 400px;">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+        <button class="btn btn-outline-dark" type="submit">Search</button>
+      </form>
+
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="reviews_page.html">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="gift_cards.html">Gift Card</a></li>
+        </ul>
+        <ul class="navbar-nav nav-icons ms-3 flex-row">
+          <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-heart"></i></a></li>
+          <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-bag"></i></a></li>
+          <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-person"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="container my-5 pt-5">
+    <h2 class="text-center mb-4">Gift Cards</h2>
+    <p class="text-center">Give the gift of style! Our elegant gift cards are perfect for every occasion — birthdays, anniversaries, holidays, or simply to show appreciation.</p>
+
+    <!-- Gift Card Options -->
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-4 mb-3">
+        <div class="card h-100 text-center">
+          <div class="card-body">
+            <h5 class="card-title">$50 Gift Card</h5>
+            <p class="card-text">A thoughtful way to start a stylish journey.</p>
+            <button class="btn btn-dark">Buy Now</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="card h-100 text-center">
+          <div class="card-body">
+            <h5 class="card-title">$100 Gift Card</h5>
+            <p class="card-text">Perfect for selecting premium outfits and accessories.</p>
+            <button class="btn btn-dark">Buy Now</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="card h-100 text-center">
+          <div class="card-body">
+            <h5 class="card-title">$200 Gift Card</h5>
+            <p class="card-text">For those who deserve nothing but luxury and elegance.</p>
+            <button class="btn btn-dark">Buy Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gift Card Form -->
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-6">
+        <h4>Send a Gift Card</h4>
+        <form onsubmit="return validateForm()">
+          <div class="mb-3">
+            <label for="recipientName" class="form-label">Recipient’s Name</label>
+            <input type="text" class="form-control" id="recipientName" placeholder="Enter name" required>
+          </div>
+          <div class="mb-3">
+            <label for="recipientEmail" class="form-label">Recipient’s Email</label>
+            <input type="email" class="form-control" id="recipientEmail" placeholder="Enter email" required>
+          </div>
+          <div class="mb-3">
+            <label for="amount" class="form-label">Select Amount</label>
+            <select class="form-select" id="amount" required>
+              <option value="">Choose amount</option>
+              <option value="50">$50</option>
+              <option value="100">$100</option>
+              <option value="200">$200</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="message" class="form-label">Personal Message</label>
+            <textarea class="form-control" id="message" rows="3" placeholder="Write a message..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-dark w-100">Send Gift Card</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Why Choose Our Gift Cards -->
+    <div class="text-center mb-5">
+      <h4>Why Choose Stitch Theory Gift Cards?</h4>
+      <div class="d-flex justify-content-center flex-wrap gap-4 mt-3">
+        <div><i class="bi bi-check-circle-fill text-success"></i> Instantly delivered via email</div>
+        <div><i class="bi bi-check-circle-fill text-success"></i> Perfect for any occasion</div>
+        <div><i class="bi bi-check-circle-fill text-success"></i> No expiration date</div>
+        <div><i class="bi bi-check-circle-fill text-success"></i> Redeemable across all collections</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Validation -->
+  <script>
+    function validateForm() {
+      const name = document.getElementById('recipientName').value.trim();
+      const email = document.getElementById('recipientEmail').value.trim();
+      const amount = document.getElementById('amount').value;
+
+      if (name === "") {
+        alert("Please enter the recipient's name.");
+        return false;
+      }
+
+      if (email === "") {
+        alert("Please enter the recipient's email.");
+        return false;
+      }
+
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address.");
+        return false;
+      }
+
+      if (amount === "") {
+        alert("Please select an amount.");
+        return false;
+      }
+
+      alert("Gift card sent successfully!");
+      return true;
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"/>
+</body>
+</html>
