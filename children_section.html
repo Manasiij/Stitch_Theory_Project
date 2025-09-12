@@ -208,61 +208,64 @@
       font-size: 18px;
       margin: 10px 0;
     }
-    
-    .quantity {
+    /* Quantity Control - Standardized */
+    .quantity-control {
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       margin: 15px 0;
-      gap: 10px;
+      gap: 5px;
     }
     
-    .quantity button {
-      padding: 8px 12px;
-      background: #666;
+    .quantity-control button {
+      width: 32px;
+      height: 32px;
       border: none;
+      background: #111;
       color: white;
+      font-weight: bold;
       cursor: pointer;
       border-radius: 4px;
-      font-weight: bold;
+      transition: background-color 0.2s;
     }
     
-    .quantity button:hover {
+    .quantity-control button:hover {
       background: #333;
     }
     
-    .quantity span {
-      font-size: 16px;
+    .quantity-control input {
+      width: 50px;
+      height: 32px;
+      text-align: center;
+      border: 1px solid #ccc;
+      border-radius: 4px;
       font-weight: bold;
-      min-width: 20px;
+      margin: 0 5px;
+    }
+
+    /* Buttons - Standardized */
+    .product-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
     }
     
-    .btn {
-      padding: 12px 20px;
-      margin: 5px;
-      border: none;
-      border-radius: 6px;
+    .btn-shop, .btn-cart {
+      flex: 1;
+      background-color: white;
+      color: #111;
+      border: 1px solid #111;
+      padding: 10px 15px;
+      border-radius: 5px;
+      font-weight: bold;
       cursor: pointer;
-      font-weight: bold;
-      transition: all 0.2s;
+      transition: all 0.3s;
     }
     
-    .btn-add {
-      background: #383333;
+    .btn-shop:hover, .btn-cart:hover {
+      background-color: #111;
       color: white;
-    }
-    
-    .btn-add:hover {
-      background: #333;
-    }
-    
-    .btn-shop {
-      background: #666;
-      color: white;
-    }
-    
-    .btn-shop:hover {
-      background: #555;
+      border: 1px solid #111;
     }
     
     .no-results {
@@ -376,125 +379,155 @@
         <div class="results-count" id="resultsCount">Showing all products</div>
       </div>
       
-      <div class="products" id="productsContainer">
-        <div class="product" data-category="dress" data-price="899" data-color="pink">
-          <div class="product-category">Girls 4-8 Years</div>
-          <img src="images/pink_dress.avif" alt="Pink Dress">
-          <h3>Pink Dress</h3>
-          <p class="price">$ 899</p>
-          <div class="quantity">
-            <button onclick="changeQty('dress1', -1)">-</button>
-            <span id="qty-dress1">1</span>
-            <button onclick="changeQty('dress1', 1)">+</button>
-          </div>
-          <button class="btn btn-add" onclick="addToCart('Pink Princess Dress', 899, 'dress1')">Add to Cart</button>
-          <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
-        </div>
+<div class="products" id="productsContainer">
+  <div class="product" data-category="dress" data-price="899" data-color="pink">
+    <div class="product-category">Girls 4-8 Years</div>
+    <img src="images/pink_dress.avif" alt="Pink Dress">
+    <h3>Pink Dress</h3>
+    <p class="price">$ 899</p>
+    <div class="quantity-control">
+      <button onclick="updateQuantity('dress1', -1)">-</button>
+      <input type="text" id="qty-dress1" value="1" readonly>
+      <button onclick="updateQuantity('dress1', 1)">+</button>
+    </div>
+    <div class="product-buttons">
+      <button class="btn-shop" onclick="shopNow('Pink Dress', 899, 'dress1')">Shop Now</button>
+      <button class="btn-cart" onclick="addToCart('Pink Dress', 899, 'dress1')">Add to Cart</button>
+    </div>
+  </div>
 
-        <div class="product" data-category="tshirt" data-price="399" data-color="blue">
-          <div class="product-category">Boys 6-10 Years</div>
-          <img src="images/blue_superhero_kids.webp" alt="Blue Superhero T-Shirt">
-          <h3>Blue Superhero T-Shirt</h3>
-          <p class="price">$ 399</p>
-          <div class="quantity">
-            <button onclick="changeQty('tshirt1', -1)">-</button>
-            <span id="qty-tshirt1">1</span>
-            <button onclick="changeQty('tshirt1', 1)">+</button>
-          </div>
-          <button class="btn btn-add" onclick="addToCart('Blue Superhero T-Shirt', 399, 'tshirt1')">Add to Cart</button>
-          <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
-        </div>
+  <div class="product" data-category="tshirt" data-price="399" data-color="blue">
+    <div class="product-category">Boys 6-10 Years</div>
+    <img src="images/blue_superhero_kids.webp" alt="Blue Superhero T-Shirt">
+    <h3>Blue Superhero T-Shirt</h3>
+    <p class="price">$ 399</p>
+    <div class="quantity-control">
+      <button onclick="updateQuantity('tshirt1', -1)">-</button>
+      <input type="text" id="qty-tshirt1" value="1" readonly>
+      <button onclick="updateQuantity('tshirt1', 1)">+</button>
+    </div>
+    <div class="product-buttons">
+      <button class="btn-shop" onclick="shopNow('Blue Superhero T-Shirt', 399, 'tshirt1')">Shop Now</button>
+      <button class="btn-cart" onclick="addToCart('Blue Superhero T-Shirt', 399, 'tshirt1')">Add to Cart</button>
+    </div>
+  </div>
 
-        <div class="product" data-category="shorts" data-price="499" data-color="yellow">
-          <div class="product-category">Unisex 3-7 Years</div>
-          <img src="images/yelloe_summer_shorts.webp" alt="Yellow Summer Shorts">
-          <h3>Yellow Summer Shorts</h3>
-          <p class="price">$ 499</p>
-          <div class="quantity">
-            <button onclick="changeQty('shorts1', -1)">-</button>
-            <span id="qty-shorts1">1</span>
-            <button onclick="changeQty('shorts1', 1)">+</button>
-          </div>
-          <button class="btn btn-add" onclick="addToCart('Yellow Summer Shorts', 499, 'shorts1')">Add to Cart</button>
-          <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
-        </div>
+  <div class="product" data-category="shorts" data-price="499" data-color="yellow">
+    <div class="product-category">Unisex 3-7 Years</div>
+    <img src="images/yelloe_summer_shorts.webp" alt="Yellow Summer Shorts">
+    <h3>Yellow Summer Shorts</h3>
+    <p class="price">$ 499</p>
+    <div class="quantity-control">
+      <button onclick="updateQuantity('shorts1', -1)">-</button>
+      <input type="text" id="qty-shorts1" value="1" readonly>
+      <button onclick="updateQuantity('shorts1', 1)">+</button>
+    </div>
+    <div class="product-buttons">
+      <button class="btn-shop" onclick="shopNow('Yellow Summer Shorts', 499, 'shorts1')">Shop Now</button>
+      <button class="btn-cart" onclick="addToCart('Yellow Summer Shorts', 499, 'shorts1')">Add to Cart</button>
+    </div>
+  </div>
 
-        <div class="product" data-category="tshirt" data-price="449" data-color="green">
-          <div class="product-category">Girls 5-9 Years</div>
-          <img src="images/green_tshirt_kids.webp" alt="Green Rainbow T-Shirt">
-          <h3>Green T-Shirt</h3>
-          <p class="price">$ 449</p>
-          <div class="quantity">
-            <button onclick="changeQty('tshirt2', -1)">-</button>
-            <span id="qty-tshirt2">1</span>
-            <button onclick="changeQty('tshirt2', 1)">+</button>
-          </div>
-          <button class="btn btn-add" onclick="addToCart('Green T-Shirt', 449, 'tshirt2')">Add to Cart</button>
-          <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
-        </div>
+  <div class="product" data-category="tshirt" data-price="449" data-color="green">
+    <div class="product-category">Girls 5-9 Years</div>
+    <img src="images/green_tshirt_kids.webp" alt="Green Rainbow T-Shirt">
+    <h3>Green T-Shirt</h3>
+    <p class="price">$ 449</p>
+    <div class="quantity-control">
+      <button onclick="updateQuantity('tshirt2', -1)">-</button>
+      <input type="text" id="qty-tshirt2" value="1" readonly>
+      <button onclick="updateQuantity('tshirt2', 1)">+</button>
+    </div>
+    <div class="product-buttons">
+      <button class="btn-shop" onclick="shopNow('Green T-Shirt', 449, 'tshirt2')">Shop Now</button>
+      <button class="btn-cart" onclick="addToCart('Green T-Shirt', 449, 'tshirt2')">Add to Cart</button>
+    </div>
+  </div>
 
-        <div class="product" data-category="jacket" data-price="1299" data-color="blue">
-          <div class="product-category">Boys 4-8 Years</div>
-          <img src="images/denim_jacket_blue.avif" alt="Blue Denim Jacket">
-          <h3>Blue Denim Jacket</h3>
-          <p class="price">$ 1,299</p>
-          <div class="quantity">
-            <button onclick="changeQty('jacket1', -1)">-</button>
-            <span id="qty-jacket1">1</span>
-            <button onclick="changeQty('jacket1', 1)">+</button>
-          </div>
-          <button class="btn btn-add" onclick="addToCart('Blue Denim Jacket', 1299, 'jacket1')">Add to Cart</button>
-          <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
-        </div>
+  <div class="product" data-category="jacket" data-price="1299" data-color="blue">
+    <div class="product-category">Boys 4-8 Years</div>
+    <img src="images/denim_jacket_blue.avif" alt="Blue Denim Jacket">
+    <h3>Blue Denim Jacket</h3>
+    <p class="price">$ 1,299</p>
+    <div class="quantity-control">
+      <button onclick="updateQuantity('jacket1', -1)">-</button>
+      <input type="text" id="qty-jacket1" value="1" readonly>
+      <button onclick="updateQuantity('jacket1', 1)">+</button>
+    </div>
+    <div class="product-buttons">
+      <button class="btn-shop" onclick="shopNow('Blue Denim Jacket', 1299, 'jacket1')">Shop Now</button>
+      <button class="btn-cart" onclick="addToCart('Blue Denim Jacket', 1299, 'jacket1')">Add to Cart</button>
+    </div>
+  </div>
 
-        <div class="product" data-category="pajamas" data-price="699" data-color="pink">
-          <div class="product-category">Girls 2-6 Years</div>
-          <img src="images/pink_unicorn_pajamas.avif" alt="Pink Unicorn Pajamas">
-          <h3>Pink Unicorn Pajamas</h3>
-          <p class="price">$ 699</p>
-          <div class="quantity">
-            <button onclick="changeQty('pajamas1', -1)">-</button>
-            <span id="qty-pajamas1">1</span>
-            <button onclick="changeQty('pajamas1', 1)">+</button>
-          </div>
-          <button class="btn btn-add" onclick="addToCart('Pink Unicorn Pajamas', 699, 'pajamas1')">Add to Cart</button>
-          <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
-        </div>
+  <div class="product" data-category="pajamas" data-price="699" data-color="pink">
+    <div class="product-category">Girls 2-6 Years</div>
+    <img src="images/pink_unicorn_pajamas.avif" alt="Pink Unicorn Pajamas">
+    <h3>Pink Unicorn Pajamas</h3>
+    <p class="price">$ 699</p>
+    <div class="quantity-control">
+      <button onclick="updateQuantity('pajamas1', -1)">-</button>
+      <input type="text" id="qty-pajamas1" value="1" readonly>
+      <button onclick="updateQuantity('pajamas1', 1)">+</button>
+    </div>
+    <div class="product-buttons">
+      <button class="btn-shop" onclick="shopNow('Pink Unicorn Pajamas', 699, 'pajamas1')">Shop Now</button>
+      <button class="btn-cart" onclick="addToCart('Pink Unicorn Pajamas', 699, 'pajamas1')">Add to Cart</button>
+    </div>
+  </div>
 
-        <div class="product" data-category="shorts" data-price="549" data-color="blue">
-          <div class="product-category">Boys 5-10 Years</div>
-          <img src="images/blue_sports_shorts.avif" alt="Blue Sports Shorts">
-          <h3>Blue Sports Shorts</h3>
-          <p class="price">₹549</p>
-          <div class="quantity">
-            <button onclick="changeQty('shorts2', -1)">-</button>
-            <span id="qty-shorts2">1</span>
-            <button onclick="changeQty('shorts2', 1)">+</button>
-          </div>
-          <button class="btn btn-add" onclick="addToCart('Blue Sports Shorts', 549, 'shorts2')">Add to Cart</button>
-          <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
-        </div>
+  <div class="product" data-category="shorts" data-price="549" data-color="blue">
+    <div class="product-category">Boys 5-10 Years</div>
+    <img src="images/blue_sports_shorts.avif" alt="Blue Sports Shorts">
+    <h3>Blue Sports Shorts</h3>
+    <p class="price">₹549</p>
+    <div class="quantity-control">
+      <button onclick="updateQuantity('shorts2', -1)">-</button>
+      <input type="text" id="qty-shorts2" value="1" readonly>
+      <button onclick="updateQuantity('shorts2', 1)">+</button>
+    </div>
+    <div class="product-buttons">
+      <button class="btn-shop" onclick="shopNow('Blue Sports Shorts', 549, 'shorts2')">Shop Now</button>
+      <button class="btn-cart" onclick="addToCart('Blue Sports Shorts', 549, 'shorts2')">Add to Cart</button>
+    </div>
+  </div>
 
-        <div class="product" data-category="dress" data-price="799" data-color="yellow">
-          <div class="product-category">Girls 3-7 Years</div>
-          <img src="images/yellow_sunflower_dress.webp" alt="Yellow Sunflower Dress">
-          <h3>Yellow Sunflower Dress</h3>
-          <p class="price">₹799</p>
-          <div class="quantity">
-            <button onclick="changeQty('dress2', -1)">-</button>
-            <span id="qty-dress2">1</span>
-            <button onclick="changeQty('dress2', 1)">+</button>
-          </div>
-          <button class="btn btn-add" onclick="addToCart('Yellow Sunflower Dress', 799, 'dress2')">Add to Cart</button>
-          <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
-        </div>
-      </div>
+  <div class="product" data-category="dress" data-price="799" data-color="yellow">
+    <div class="product-category">Girls 3-7 Years</div>
+    <img src="images/yellow_sunflower_dress.webp" alt="Yellow Sunflower Dress">
+    <h3>Yellow Sunflower Dress</h3>
+    <p class="price">₹799</p>
+    <div class="quantity-control">
+      <button onclick="updateQuantity('dress2', -1)">-</button>
+      <input type="text" id="qty-dress2" value="1" readonly>
+      <button onclick="updateQuantity('dress2', 1)">+</button>
+    </div>
+    <div class="product-buttons">
+      <button class="btn-shop" onclick="shopNow('Yellow Sunflower Dress', 799, 'dress2')">Shop Now</button>
+      <button class="btn-cart" onclick="addToCart('Yellow Sunflower Dress', 799, 'dress2')">Add to Cart</button>
+    </div>
+  </div>
+</div>
+
       
       <div class="no-results" id="noResults" style="display: none;">
         No products match your current filters. Try adjusting your selection.
       </div>
     </div>
   </div>
+<script>
+  function updateQuantity(id, change) {
+    let qtyEl = document.getElementById("qty-" + id);
+    let qty = parseInt(qtyEl.value);
+    qty = Math.max(1, qty + change);
+    qtyEl.value = qty;
+  }
+
+  function shopNow(name, price, id) {
+    addToCart(name, price, id);
+    goToCart();
+  }
+</script>
 
   <script>
     function changeQty(id, change) {
