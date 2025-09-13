@@ -42,7 +42,7 @@
 <body>
 
 <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg fixed-top shadow-sm">
+  <nav class="navbar navbar-expand-lg fixed-top shadow-sm bg-white">
     <div class="container-fluid">
       <img src="Images/ST_logo-removebg-preview.png" alt="logo" width="150" height="50" class="border border-2 border-light" />
       <link rel="icon" type="Images/png" href="Images/ST logo 2.jpg"/>
@@ -51,7 +51,6 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Search bar -->
       <form class="d-flex mx-auto" style="width: 400px;">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
         <button class="btn btn-outline-dark" type="submit">Search</button>
@@ -71,10 +70,10 @@
           <li class="nav-item"><a class="nav-link" href="profile.html"><i class="bi bi-person"></i></a></li>
         </ul>
       </div>
-    </div>
-  </nav>
+    </div>
+  </nav>
 
-  <!-- Payment Section -->
+<!-- Payment Section -->
   <div class="container my-4 mt-5">
     <div class="row g-4">
       <div class="col-lg-8">
@@ -123,57 +122,60 @@
     </div>
   </div>
 
-  <script>
+<script>
+  const discountAmount = 10; // Discount for online payment
 
-    window.onload = function() {
-      const totalPrice = localStorage.getItem('totalPrice') || "$0";
-      const totalDiscount = localStorage.getItem('totalDiscount') || "-$0";
-      const orderTotal = localStorage.getItem('orderTotal') || "$0";
-      const itemCount = localStorage.getItem('itemCount') || "0";
+  window.onload = function() {
+    const totalPrice = parseFloat(localStorage.getItem('totalPrice')?.replace('$','')) || 0;
+    const totalDiscount = parseFloat(localStorage.getItem('totalDiscount')?.replace('-$','')) || 0;
+    const orderTotal = parseFloat(localStorage.getItem('orderTotal')?.replace('$','')) || 0;
+    const itemCount = localStorage.getItem('itemCount') || "0";
 
-      document.getElementById('total-price').innerText = totalPrice.replace('$','');
-      document.getElementById('total-discount').innerText = totalDiscount.replace('-$','');
-      document.getElementById('order-total').innerText = orderTotal.replace('$','');
-      document.getElementById('item-count').innerText = itemCount;
-      document.getElementById('cod-price').innerText = orderTotal.replace('$','');
-      document.getElementById('online-price').innerText = orderTotal.replace('$','');
+    document.getElementById('total-price').innerText = totalPrice.toFixed(2);
+    document.getElementById('total-discount').innerText = totalDiscount.toFixed(2);
+    document.getElementById('order-total').innerText = orderTotal.toFixed(2);
+    document.getElementById('item-count').innerText = itemCount;
+    document.getElementById('cod-price').innerText = orderTotal.toFixed(2);
+    document.getElementById('online-price').innerText = orderTotal.toFixed(2);
+  }
+
+  function selectMethod(element) {
+    const totalPrice = parseFloat(localStorage.getItem('orderTotal')?.replace('$','')) || 0;
+    const onlinePriceElement = document.getElementById('online-price');
+    const codPriceElement = document.getElementById('cod-price');
+    const orderTotalElement = document.getElementById('order-total');
+
+    document.querySelectorAll('.method').forEach(method => method.classList.remove('selected-method'));
+    element.classList.add('selected-method');
+    element.querySelector('input[type="radio"]').checked = true;
+
+    if (element.querySelector('h6 span').id === 'online-price') {
+      const newOnlinePrice = totalPrice - discountAmount;
+      onlinePriceElement.innerText = newOnlinePrice > 0 ? newOnlinePrice.toFixed(2) : '0';
+      orderTotalElement.innerText = newOnlinePrice > 0 ? newOnlinePrice.toFixed(2) : '0';
+    } else {
+      onlinePriceElement.innerText = totalPrice.toFixed(2);
+      orderTotalElement.innerText = totalPrice.toFixed(2);
     }
+  }
 
-    function selectMethod(element) {
-      document.querySelectorAll('.method').forEach(method => method.classList.remove('selected-method'));
-      element.classList.add('selected-method');
-      element.querySelector('input[type="radio"]').checked = true;
-    }
+  function placeOrder() {
+    alert("Order placed successfully!");
+    localStorage.clear();
+    window.location.href = "index.html";
+  }
+</script>
 
-    function selectResell(option) {
-      document.getElementById('resell-no').classList.remove('btn-purple');
-      document.getElementById('resell-yes').classList.remove('btn-purple');
-      if(option === 'yes') {
-        document.getElementById('resell-yes').classList.add('btn-purple');
-      } else {
-        document.getElementById('resell-no').classList.add('btn-purple');
-      }
-    }
-
-    function placeOrder() {
-      alert("Order placed successfully!");
-      localStorage.clear();
-      window.location.href = "index.html";
-    }
-  </script>
-
-  <!-- Footer -->
+<!-- Footer -->
   <footer class="pt-5 pb-4 bg-dark text-white">
     <div class="container text-md-left">
       <div class="row text-md-left">
 
-        <!-- About -->
         <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
           <h5 class="text-uppercase mb-4 font-weight-bold">Stitch Theory</h5>
           <p>Your luxury clothing brand committed to elegance, comfort, and timeless fashion. Explore our collections for men, women, and children.</p>
         </div>
 
-        <!-- Quick Links -->
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
           <h5 class="text-uppercase mb-4 font-weight-bold">Quick Links</h5>
           <p><a href="index.html">Home</a></p>
@@ -182,7 +184,6 @@
           <p><a href="reviews_page.html">Reviews</a></p>
         </div>
 
-        <!-- Support -->
         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
           <h5 class="text-uppercase mb-4 font-weight-bold">Support</h5>
           <p><a href="faq.html">FAQs</a></p>
@@ -191,7 +192,6 @@
           <p><a href="terms.html">Terms of Use</a></p>
         </div>
 
-        <!-- Contact -->
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
           <h5 class="text-uppercase mb-4 font-weight-bold">Contact</h5>
           <p><i class="bi bi-house-door-fill me-2"></i>123 Fashion Street, Mumbai, India</p>
@@ -217,8 +217,8 @@
         </div>
       </div>
     </div>
-  </footer>
+  </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
