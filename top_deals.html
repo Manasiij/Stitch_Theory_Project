@@ -1,83 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top Deals - Clothing Store</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Top Deals - Stitch Theory</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <style>
+  <style>
+        @font-face {
+      font-family: 'Trajan';
+      src: url('fonts/TrajanPro-Regular.otf') format('opentype');
+    }
     /* Navbar */
     .navbar {
-      background-color: #222;
+     font-family: 'Trajan', serif;
+     background-color: white;
     }
     .navbar-brand {
       font-weight: bold;
       font-size: 1.5rem;
-      color: white !important;
+      color: black !important;
     }
     .nav-link {
-      color: white !important;
+      color: black !important;
     }
 
-    /* Wheel styles */
-    .wheel-container {
-      position: relative;
-      margin: 20px auto;
-      width: 350px;
-      height: 350px;
-    }
-    .wheel {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: 10px solid #333;
-      transition: transform 5s ease-out;
-    }
-    .pointer {
-      width: 0;
-      height: 0;
-      border-left: 20px solid transparent;
-      border-right: 20px solid transparent;
-      border-top: 30px solid red;
-      margin: 10px auto;
-      z-index: 10;
-    }
-    .spin-btn {
-      margin-top: 20px;
-      padding: 10px 25px;
-      font-size: 18px;
-      background: #007bff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .spin-btn:disabled {
-      background: gray;
-      cursor: not-allowed;
-    }
-    .spin-btn:hover:enabled {
-      background: #0056b3;
-    }
-    #result {
-      margin-top: 15px;
-      font-size: 18px;
-      font-weight: bold;
-      color: green;
-    }
-    #timer {
-      margin-top: 10px;
-      font-size: 16px;
-      color: red;
-      font-weight: bold;
-    }
-
-    /* Hover effect for deal images */
+    /* Product Image Hover */
     .deal-img {
-      transition: transform 0.4s, box-shadow 0.4s;
+      transition: transform 0.3s, box-shadow 0.3s;
       border-radius: 12px;
       cursor: pointer;
       height: 300px;
@@ -85,310 +35,253 @@
       width: 100%;
     }
     .deal-img:hover {
-      transform: scale(1.07);
-      box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3);
+      transform: scale(1.05);
+      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Quantity Control */
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 10px 0;
+    }
+    .quantity-control button {
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: black;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .quantity-control input {
+      width: 50px;
+      text-align: center;
+      border: 1px solid #ccc;
+      margin: 0 5px;
+    }
+
+    /* Buttons */
+    .btn-shop, .btn-cart {
+      background-color: black;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      margin: 5px;
+      transition: 0.3s;
+    }
+    .btn-shop:hover, .btn-cart:hover {
+      background-color: white;
+      color: black;
+      border: 1px solid black;
     }
   </style>
-  </head>
-  <body class="bg-light">
+</head>
+<body class="bg-light">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <!-- Logo + Brand Name -->
-    <a class="navbar-brand d-flex align-items-center" href="#">
-      <img src="Images/stitch theory logo.jpg" alt="Logo" width="50" height="50" class="me-2">
-      <span>Stitch Theory</span>
-    </a>
+<!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top shadow-sm">
+    <div class="container-fluid">
+      <img src="Images/ST_logo-removebg-preview.png" alt="logo" width="150" height="50" class="border border-2 border-light" />
+      <link rel="icon" type="Images/png" href="Images/ST logo 2.jpg"/>
+      <a class="navbar-brand fs-4" href="index.html"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <!-- Search bar -->
-        <form class="d-flex mx-auto" style="width: 400px;">
-          <input class="form-control me-2" type="search" placeholder="Search"
-            aria-label="Search">
-          <button class="btn btn-outline-light" type="submit">Search</button>
-        </form>
+      <!-- Search bar -->
+      <form class="d-flex mx-auto" style="width: 400px;">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+        <button class="btn btn-outline-dark" type="submit">Search</button>
+      </form>
 
-        <!-- Icons -->
-        <li class="nav-item ms-3">
-          <a class="nav-link" href="#">
-            <img src="/Images/istockphoto-2007184709-1024x1024.jpg" width="22"
-              alt="wishlist">
-          </a>
-        </li>
-        <li class="nav-item ms-2">
-          <a class="nav-link" href="#">
-            <img src="/Images/istockphoto-1160747149-1024x1024.jpg" width="22"
-              alt="notification">
-          </a>
-        </li>
-
-        <li class="nav-item ms-1">
-          <a class="nav-link" href="#">
-            <img src="/Images/istockphoto-1300845620-1024x1024.jpg" width="22"
-              alt="account">
-          </a>
-        </li>
-
-        <div class="collapse navbar-collapse" id="navbarScroll">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link active"
-                href="index.html">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#"
-                data-bs-toggle="dropdown">Gallery</a>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="#">Photos</a></li>
-                <li><a class="dropdown-item" href="#">Videos</a></li>
-              </ul>
-              <li class="nav-item">
-                <a class="nav-link" href="cart.html">🛒 Cart</a>
-              </li>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-            <li class="nav-item">
-              <a class="nav-link btn btn-danger text-white px-3 ms-2"
-                data-bs-toggle="modal" data-bs-target="#discountModal">
-                🎡 Discounts
-              </a>
-            </li>
-          </ul>
-        </div>
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="reviews_page.html">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="gift_cards.html">Gift Card</a></li>
+        </ul>
+        <ul class="navbar-nav nav-icons ms-3 flex-row">
+          <li class="nav-item"><a class="nav-link" href="wishlist.html"><i class="bi bi-heart"></i></a></li>
+          <li class="nav-item"><a class="nav-link" href="cart.html"><i class="bi bi-bag"></i></a></li>
+          <li class="nav-item"><a class="nav-link" href="profile.html"><i class="bi bi-person"></i></a></li>
+        </ul>
       </div>
-    </nav>
+    </div>
+  </nav>
+  <!-- Top Deals -->
+  <div class="container text-center py-5 mt-4">
+    <h1 class="mb-4"><b>Top Deals</b></h1>
+    <p>Get the hottest deals today – shop now!</p>
 
-    <!-- Top Deals Section -->
-    <div class="container text-center py-5">
-      <h1 class="mb-4"><b>Top Deals</b></h1>
-      <p>Check out our best discounts and spin to win more!</p>
-
-      <div class="row g-4 mb-5">
-        <!-- Product 1 -->
-        <div class="col-md-4">
-          <img src="images/Summer Dress.jpg" alt="Deal 1" class="deal-img">
-          <h5 class="mt-2">Summer Dress</h5>
-          <p><strong>4999</strong> <del>7999</del></p>
-          
-
-          <button class="btn btn-success"
-            onclick="addToCart('Summer Dress', 4999)">Add to Cart</button>
+    <div class="row g-4">
+      <!-- Product 1 -->
+      <div class="col-md-4">
+        <img src="images/summer_dress_floral.avif" alt="Summer Dress" class="deal-img">
+        <h5 class="mt-2">Summer Dress</h5>
+        <p><strong>$49</strong> <del>$79</del></p>
+        <div class="quantity-control">
+          <button onclick="updateQuantity('dress', -1)">-</button>
+          <input type="text" id="qty-dress" value="1" readonly>
+          <button onclick="updateQuantity('dress', 1)">+</button>
         </div>
-
-        <!-- Product 2 -->
-        <div class="col-md-4">
-          <img src="images/casual shirt.jpg" alt="Deal 2" class="deal-img">
-          <h5 class="mt-2">Casual Shirt</h5>
-          <p><strong>2500</strong> <del>5000</del></p>
-           
-          <button class="btn btn-success"
-            onclick="addToCart('Casual Shirt', 2500)">Add to Cart</button>
-        </div>
-          
-
-        <!-- Product 3 -->
-        <div class="col-md-4">
-          <img src="images/demin jeans.jpg" alt="Deal 3" class="deal-img">
-          <h5 class="mt-2">Denim Jeans</h5>
-          <p><strong>3999</strong> <del>6999</del></p>
-           
-          <button class="btn btn-success"
-            onclick="addToCart('Denim Jeans', 3999)">Add to Cart</button>
-        </div>
-         
+        <button class="btn-shop" onclick="shopNow('Summer Dress', 49, 'dress')">Shop Now</button>
+        <button class="btn-cart" onclick="addToCart('Summer Dress', 49, 'dress')">Add to Cart</button>
       </div>
-    </div>
 
-  
-
-
-<!-- 🔹 Hero Banner -->
-<div class="bg-warning text-center py-5">
-  <h1 class="display-4"> Mega Sale – Up to 50% OFF!</h1>
-  <p class="lead">Grab your favorite styles before they're gone.</p>
-  <a href="deals.html" class="btn btn-dark btn-lg">Shop Now</a>
-</div>
-
-<!-- 🔹 Deals Section -->
-<div class="container my-5">
-  <h2 class="text-center mb-4">Top Deals</h2>
-  <div class="row g-4">
-
-    <!-- Product Card 1 -->
-    <div class="col-md-4">
-      <div class="card position-relative">
-        <span class="discount-badge">-30%</span>
-        <img src="Images/casual shirt.jpg" class="card-img-top" alt="Shirt">
-        <div class="card-body text-center">
-          <h5 class="card-title">Casual Shirt</h5>
-          <p><span class="old-price">$40</span> <span class="new-price">$28</span></p>
-          <a href="#" class="btn btn-primary">Add to Cart</a>
+      <!-- Product 2 -->
+      <div class="col-md-4">
+        <img src="images/casual shirt.jpg" alt="Casual Shirt" class="deal-img">
+        <h5 class="mt-2">Casual Shirt</h5>
+        <p><strong>$25</strong> <del>$50</del></p>
+        <div class="quantity-control">
+          <button onclick="updateQuantity('shirt', -1)">-</button>
+          <input type="text" id="qty-shirt" value="1" readonly>
+          <button onclick="updateQuantity('shirt', 1)">+</button>
         </div>
+        <button class="btn-shop" onclick="shopNow('Casual Shirt', 25, 'shirt')">Shop Now</button>
+        <button class="btn-cart" onclick="addToCart('Casual Shirt', 25, 'shirt')">Add to Cart</button>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="col-md-4">
+        <img src="Images/hoddie_4.jpeg" alt="Hoodie" class="deal-img">
+        <h5 class="mt-2">Hoodie</h5>
+        <p><strong>$39</strong> <del>$59</del></p>
+        <div class="quantity-control">
+          <button onclick="updateQuantity('hoodie', -1)">-</button>
+          <input type="text" id="qty-hoodie" value="1" readonly>
+          <button onclick="updateQuantity('hoodie', 1)">+</button>
+        </div>
+        <button class="btn-shop" onclick="shopNow('Hoodie', 39, 'hoodie')">Shop Now</button>
+        <button class="btn-cart" onclick="addToCart('Hoodie', 39, 'hoodie')">Add to Cart</button>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="col-md-4">
+        <img src="Images/leather_jacket.jpeg" alt="Leather Jacket" class="deal-img">
+        <h5 class="mt-2">Leather Jacket</h5>
+        <p><strong>$79</strong> <del>$129</del></p>
+        <div class="quantity-control">
+          <button onclick="updateQuantity('jacket', -1)">-</button>
+          <input type="text" id="qty-jacket" value="1" readonly>
+          <button onclick="updateQuantity('jacket', 1)">+</button>
+        </div>
+        <button class="btn-shop" onclick="shopNow('Leather Jacket', 79, 'jacket')">Shop Now</button>
+        <button class="btn-cart" onclick="addToCart('Leather Jacket', 79, 'jacket')">Add to Cart</button>
+      </div>
+
+      <!-- Product 5 -->
+      <div class="col-md-4">
+        <img src="Images/sport_shoes.jpeg" alt="Sports Shoes" class="deal-img">
+        <h5 class="mt-2">Sports Shoes</h5>
+        <p><strong>$29</strong> <del>$59</del></p>
+        <div class="quantity-control">
+          <button onclick="updateQuantity('shoes', -1)">-</button>
+          <input type="text" id="qty-shoes" value="1" readonly>
+          <button onclick="updateQuantity('shoes', 1)">+</button>
+        </div>
+        <button class="btn-shop" onclick="shopNow('Sports Shoes', 29, 'shoes')">Shop Now</button>
+        <button class="btn-cart" onclick="addToCart('Sports Shoes', 29, 'shoes')">Add to Cart</button>
+      </div>
+
+      <!-- Product 6 -->
+      <div class="col-md-4">
+        <img src="Images/winter_coat.jpeg" alt="Winter Coat" class="deal-img">
+        <h5 class="mt-2">Winter Coat</h5>
+        <p><strong>$59</strong> <del>$99</del></p>
+        <div class="quantity-control">
+          <button onclick="updateQuantity('coat', -1)">-</button>
+          <input type="text" id="qty-coat" value="1" readonly>
+          <button onclick="updateQuantity('coat', 1)">+</button>
+        </div>
+        <button class="btn-shop" onclick="shopNow('Winter Coat', 59, 'coat')">Shop Now</button>
+        <button class="btn-cart" onclick="addToCart('Winter Coat', 59, 'coat')">Add to Cart</button>
       </div>
     </div>
+  </div>
 
-    <!-- Product Card 2 -->
-    <div class="col-md-4">
-      <div class="card position-relative">
-        <span class="discount-badge">-50%</span>
-        <img src="Images/Summer Dress.jpg" class="card-img-top" alt="Dress">
-        <div class="card-body text-center">
-          <h5 class="card-title">Summer Dress</h5>
-          <p><span class="old-price">$60</span> <span class="new-price">$30</span></p>
-          <a href="#" class="btn btn-primary">Add to Cart</a>
+  <!-- Footer -->
+<footer class="pt-5 pb-4 bg-dark text-white">
+  <div class="container text-md-left">
+    <div class="row text-md-left">
+      <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+        <h5 class="text-uppercase mb-4 font-weight-bold">Stitch Theory</h5>
+        <p>Your luxury clothing brand committed to elegance, comfort, and timeless fashion. Explore our collections for men, women, and children.</p>
+      </div>
+      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+        <h5 class="text-uppercase mb-4 font-weight-bold">Quick Links</h5>
+        <p><a href="index.html" class="text-white">Home</a></p>
+        <p><a href="profile.html" class="text-white">Profile</a></p>
+        <p><a href="cart.html" class="text-white">Cart</a></p>
+        <p><a href="reviews_page.html" class="text-white">Reviews</a></p>
+      </div>
+      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+        <h5 class="text-uppercase mb-4 font-weight-bold">Support</h5>
+        <p><a href="faq.html" class="text-white">FAQs</a></p>
+        <p><a href="contact.html" class="text-white">Contact Us</a></p>
+        <p><a href="privacy.html" class="text-white">Privacy Policy</a></p>
+        <p><a href="terms.html" class="text-white">Terms of Use</a></p>
+      </div>
+      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+        <h5 class="text-uppercase mb-4 font-weight-bold">Contact</h5>
+        <p><i class="bi bi-house-door-fill me-2"></i>123 Fashion Street, Mumbai, India</p>
+        <p><i class="bi bi-envelope-fill me-2"></i>support@stitchtheory.com</p>
+        <p><i class="bi bi-phone-fill me-2"></i>‪+91 98765 43210‬</p>
+      </div>
+    </div>
+    <hr class="mb-4 bg-white">
+    <div class="row align-items-center">
+      <div class="col-md-7 col-lg-8">
+        <p>© 2025 Stitch Theory. All rights reserved.</p>
+      </div>
+      <div class="col-md-5 col-lg-4">
+        <div class="text-center text-md-right">
+          <a href="#" class="text-white me-4"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="text-white me-4"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="text-white me-4"><i class="bi bi-twitter"></i></a>
+          <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
         </div>
       </div>
     </div>
+  </div>
+</footer>
 
-    <!-- Product Card 3 -->
-    <div class="col-md-4">
-      <div class="card position-relative">
-        <span class="discount-badge">-20%</span>
-        <img src="Images/demin jeans.jpg" class="card-img-top" alt="Jeans">
-        <div class="card-body text-center">
-          <h5 class="card-title">Denim Jeans</h5>
-          <p><span class="old-price">$50</span> <span class="new-price">$40</span></p>
-          <a href="#" class="btn btn-primary">Add to Cart</a>
-        </div>
-      </div>
-    </div>
+  <!-- Script -->
+  <script>
+    // Update quantity
+    function updateQuantity(product, change) {
+      let qtyInput = document.getElementById("qty-" + product);
+      let qty = parseInt(qtyInput.value) + change;
+      if (qty < 1) qty = 1;
+      qtyInput.value = qty;
+    }
 
-      const existingItem = cart.find(item => item.name === name);
+    // Add to cart
+    function addToCart(name, price, product) {
+      let qty = parseInt(document.getElementById("qty-" + product).value);
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      let existingItem = cart.find(item => item.name === name);
       if (existingItem) {
-        existingItem.quantity += 1;
+        existingItem.quantity += qty;
       } else {
-        cart.push({ name, price, quantity: 1 });
+        cart.push({ name, price, quantity: qty });
       }
 
       localStorage.setItem("cart", JSON.stringify(cart));
       alert(name + " added to cart!");
     }
 
-    // ---------------- WHEEL SCRIPT ----------------
-    const canvas = document.getElementById("wheel");
-    const ctx = canvas.getContext("2d");
-
-    const discounts = [
-      { text: "10% OFF", code: "DEAL10" },
-      { text: "20% OFF", code: "DEAL20" },
-      { text: "30% OFF", code: "DEAL30" },
-      { text: "40% OFF", code: "DEAL40" },
-      { text: "50% OFF", code: "DEAL50" },
-      { text: "No Luck!", code: "" }
-    ];
-
-    const colors = ["#FFDDC1", "#FFABAB", "#FFC3A0", "#D5AAFF", "#85E3FF", "#B9FBC0"];
-    const size = discounts.length;
-    const arc = (2 * Math.PI) / size;
-
-    canvas.width = 350;
-    canvas.height = 350;
-
-    function drawWheel() {
-      for (let i = 0; i < size; i++) {
-        const angle = i * arc;
-        ctx.beginPath();
-        ctx.fillStyle = colors[i];
-        ctx.moveTo(175, 175);
-        ctx.arc(175, 175, 175, angle, angle + arc);
-        ctx.lineTo(175, 175);
-        ctx.fill();
-
-        ctx.save();
-        ctx.translate(175, 175);
-        ctx.rotate(angle + arc / 2);
-        ctx.textAlign = "right";
-        ctx.fillStyle = "#000";
-        ctx.font = "14px Arial";
-        ctx.fillText(discounts[i].text, 160, 10);
-        ctx.restore();
-      }
+    // Shop Now
+    function shopNow(name, price, product) {
+      addToCart(name, price, product);
+      window.location.href = "cart.html";
     }
-
-    drawWheel();
-
-    let spinning = false;
-    let cooldown = false;
-
-    function spinWheel() {
-      if (spinning || cooldown) return;
-      spinning = true;
-      document.getElementById("result").textContent = "";
-
-      const spinAngle = Math.random() * 360 + 1800;
-      const duration = 5000;
-      const start = performance.now();
-
-      function animate(now) {
-        const elapsed = now - start;
-        const progress = Math.min(elapsed / duration, 1);
-        const easeOut = 1 - Math.pow(1 - progress, 3);
-        const angle = spinAngle * easeOut;
-
-        canvas.style.transform = `rotate(${angle}deg)`;
-
-        if (progress < 1) {
-          requestAnimationFrame(animate);
-        } else {
-          spinning = false;
-          const finalAngle = (angle % 360) * Math.PI / 180;
-          const winningIndex = size - 1 - Math.floor((finalAngle / (2 * Math.PI)) * size);
-
-          const prize = discounts[winningIndex];
-          setTimeout(() => {
-            document.getElementById("result").textContent =
-              prize.text === "No Luck!"
-                ? "😢 Sorry! " + prize.text
-                : "🎁 You won: " + prize.text + " | Coupon Code: " + prize.code;
-
-            startCooldown(24 * 60 * 60); // 24 hour cooldown
-          }, 300);
-        }
-      }
-
-      requestAnimationFrame(animate);
-    }
-
-    function startCooldown(seconds) {
-      cooldown = true;
-      const spinBtn = document.getElementById("spinBtn");
-      const timerEl = document.getElementById("timer");
-
-      const expiry = Date.now() + seconds * 1000;
-      localStorage.setItem("wheelExpiry", expiry);
-
-      spinBtn.disabled = true;
-
-      const interval = setInterval(() => {
-        const now = Date.now();
-        const distance = expiry - now;
-
-        if (distance <= 0) {
-          clearInterval(interval);
-          cooldown = false;
-          spinBtn.disabled = false;
-          timerEl.textContent = "";
-          localStorage.removeItem("wheelExpiry");
-        } else {
-          const hrs = Math.floor((distance / (1000 * 60 * 60)));
-          const mins = Math.floor((distance / (1000 * 60)) % 60);
-          const secs = Math.floor((distance / 1000) % 60);
-          timerEl.textContent = `⏳ Try again in ${hrs}h ${mins}m ${secs}s`;
-        }
-      }, 1000);
-    }
-
-    // Restore cooldown if it exists
-    window.onload = () => {
-      const expiry = localStorage.getItem("wheelExpiry");
-      if (expiry && Date.now() < expiry) {
-        const secondsLeft = Math.floor((expiry - Date.now()) / 1000);
-        startCooldown(secondsLeft);
-      }
-    };
   </script>
-  </body>
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <footer class="bg-dark text-white text-center py-3">
-    <p>&copy; 2025 ClothingStore | All Rights Reserved</p>
-  </footer>
+
+</body>
 </html>
