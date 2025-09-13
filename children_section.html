@@ -7,33 +7,62 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Trajan', serif;
       margin: 0;
       background: #f8f8f8;
       color: #111;
     }
     
-    .navbar {
-      background: #111;
-      padding: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: white;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+     .navbar {
+      background-color: white !important;
     }
-    
-    .navbar a {
-      color: white;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: bold;
+    .carousel-item img {
+      height: 500px;
+      object-fit: cover;
+      width: 100%;
+      transition: transform 0.5s ease;
     }
-    
-    .navbar a:hover {
-      text-decoration: underline;
+    .carousel-item:hover img {
+      transform: scale(1.05);
+    }
+    .section-title {
+      margin: 60px 0 30px;
+      text-align: center;
+      animation: fadeIn 1s ease forwards;
+    }
+    .icon-feature {
+      text-align: center;
+      padding: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .icon-feature:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 10px rgba(231, 221, 221, 0.2);
+    }
+    .icon-feature i {
+      font-size: 40px;
+      color: #555;
+    }
+    .icon-feature p {
+      margin-top: 10px;
+      font-weight: 500;
+    }
+    .product-card, .category-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .product-card:hover, .category-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    .product-card img, .category-card img {
+      width: 100%;
+      object-fit: cover;
+    }
+    .product-card img {
+      height: 200px;
+    }
+    .category-card img {
+      height: 250px;
     }
     
     .main-container {
@@ -297,15 +326,38 @@
   </style>
 </head>
 <body>
-  <div class="navbar">
-    <div class="logo">🛍️ Clothing Store</div>
-    <div>
-      <a href="index.html">Home</a>
-      <a href="men.html">Men</a>
-      <a href="women.html">Women</a>
-      <a href="cart.html">Cart 🛒</a>
+   <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top shadow-sm">
+    <div class="container-fluid">
+      <img src="Images/ST_logo-removebg-preview.png" alt="logo" width="150" height="50" class="border border-2 border-light" />
+      <link rel="icon" type="Images/png" href="Images/ST logo 2.jpg"/>
+      <a class="navbar-brand fs-4" href="index.html"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Search bar -->
+      <form class="d-flex mx-auto" style="width: 400px;">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+        <button class="btn btn-outline-dark" type="submit">Search</button>
+      </form>
+
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="reviews_page.html">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="gift_cards.html">Gift Card</a></li>
+        </ul>
+        <ul class="navbar-nav nav-icons ms-3 flex-row">
+          <li class="nav-item"><a class="nav-link" href="wishlist.html"><i class="bi bi-heart"></i></a></li>
+          <li class="nav-item"><a class="nav-link" href="cart.html"><i class="bi bi-bag"></i></a></li>
+          <li class="nav-item"><a class="nav-link" href="profile.html"><i class="bi bi-person"></i></a></li>
+        </ul>
+      </div>
     </div>
-  </div>
+  </nav>
 
   <div class="main-container">
     <div class="sidebar">
@@ -374,7 +426,7 @@
     </div>
 
     <div class="content">
-      <div class="content-header">
+      <div class="content-header mt-5">
         <h2> Children's Collection</h2>
         <div class="results-count" id="resultsCount">Showing all products</div>
       </div>
