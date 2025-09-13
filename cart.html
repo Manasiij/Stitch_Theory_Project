@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,8 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Shopping Cart</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="icon" type="image/jpg" href="Images/ST_logo_2.jpg" />
   <style>
+     @font-face {
+      font-family: 'Trajan';
+      src: url('fonts/TrajanPro-Regular.otf') format('opentype');
+    }
     body {
+      font-family: 'Trajan', serif;
       background-color: #f8f9fa;
     }
     .cart-box {
@@ -35,252 +42,292 @@
 </head>
 <body>
 
-  <!-- Navbar -->
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
-        <a class="navbar-brand" href="#">
-          <img src="images/stitch theory logo.jpg" alt="logo" width="50" height="50" class="me-2" />
-          Stitch Theory
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="top_deals.html">Top Deals</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
-            <li class="nav-item"><a class="nav-link active" href="#">Cart</a></li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Our Products
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">All products</a></li>
-                <li><a class="dropdown-item" href="#">Women's Clothing</a></li>
-                <li><a class="dropdown-item" href="#">Men's Clothing</a></li>
-                <li><a class="dropdown-item" href="#">Children's Clothing</a></li>
-              </ul>
-            </li>
-          </ul>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top shadow-sm bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand fs-4" href="index.html">
+      <img src="images/ST_logo-removebg-preview.png" alt="Stitch Theory Logo" width="150" height="50" class="border border-2 border-light">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Search bar -->
+    <form class="d-flex mx-auto" style="width: 400px;">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+      <button class="btn btn-outline-dark" type="submit">Search</button>
+    </form>
+
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="reviews_page.html">Reviews</a></li>
+        <li class="nav-item"><a class="nav-link" href="gift_cards.html">Gift Card</a></li>
+      </ul>
+      <ul class="navbar-nav nav-icons ms-3 flex-row">
+        <li class="nav-item"><a class="nav-link" href="wishlist.html"><i class="bi bi-heart"></i></a></li>
+        <li class="nav-item"><a class="nav-link" href="cart.html"><i class="bi bi-bag"></i></a></li>
+        <li class="nav-item"><a class="nav-link" href="profile.html"><i class="bi bi-person"></i></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Cart Section -->
+<div class="container my-4" style="margin-top: 100px;">
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <h5 class="mb-3">Product Details</h5>
+
+      <!-- Product Template Start -->
+      <div class="cart-item cart-box d-flex justify-content-between align-items-center" data-id="1" data-price="1299" data-discount="260" data-quantity="1">
+        <div class="d-flex align-items-center">
+          <img src="images/shirt_blue.avif" height="190px" alt="Product Image">
+          <div class="ms-3">
+            <h4>Formal Blue Shirt</h4>
+            <p>$1299 <span style="color:green;">20% Off</span></p>
+            <p>Size: M | Qty: <span class="qty-display">1</span></p>
+          </div>
+        </div>
+        <div class="d-flex align-items-center">
+          <button class="btn btn-outline-secondary quantity-btn minus" data-id="1">-</button>
+          <span class="mx-2 qty-display">1</span>
+          <button class="btn btn-outline-secondary quantity-btn plus" data-id="1">+</button>
+          <button class="btn btn-outline-danger remove-btn ms-3" data-id="1">Remove</button>
         </div>
       </div>
-    </nav>
-  </header>
 
-  <!-- Cart Section -->
-  <div class="container my-4">
-    <div class="row g-4">
-      <div class="col-lg-8">
-        <h5 class="mb-3">Product Details</h5>
-
-        <!-- Product 1 -->
-        <div class="cart-item cart-box d-flex justify-content-between align-items-center" data-id="1" data-price="1000" data-discount="200" data-quantity="1">
-          <div class="d-flex align-items-center">
-            <img src="https://www.fabfunda.com/product-img/thumb/heavy-crepe-black-one-piece-dr-1737637734.jpeg" class="me-3 rounded" alt="Product" height="150px" />
-            <div>
-              <h4>One Piece Dress</h4>
-              <p>₹1000 <span style="color:green;">20% Off</span></p>
-              <p>Size: M | Qty: <span id="qty-display-1">1</span></p>
-            </div>
-          </div>
-          <div class="d-flex align-items-center">
-            <button class="btn btn-outline-secondary quantity-btn minus" data-id="1">-</button>
-            <span id="qty-display-1" class="mx-2">1</span>
-            <button class="btn btn-outline-secondary quantity-btn plus" data-id="1">+</button>
-            <button class="btn btn-outline-danger remove-btn ms-3" data-id="1">Remove</button>
+      <!-- Product 2 -->
+      <div class="cart-item cart-box d-flex justify-content-between align-items-center" data-id="2" data-price="599" data-discount="120" data-quantity="1">
+        <div class="d-flex align-items-center">
+          <img src="images/tshirt_black.avif" class="me-3 rounded" alt="Product Image" height="190px" />
+          <div>
+            <h4>Black T-shirt</h4>
+            <p>$599 <span style="color:green;">20% Off</span></p>
+            <p>Size: L | Qty: <span class="qty-display">1</span></p>
           </div>
         </div>
-
-        <!-- Product 2 -->
-        <div class="cart-item cart-box d-flex justify-content-between align-items-center" data-id="2" data-price="1500" data-discount="300" data-quantity="1">
-          <div class="d-flex align-items-center">
-            <img src="https://janasya.com/cdn/shop/files/JAC25KR02633.jpg?v=1756810297&width=1080" class="me-3 rounded" alt="Product" height="150px" />
-            <div>
-              <h4>Trendy Kurti</h4>
-              <p>₹1500 <span style="color:green;">20% Off</span></p>
-              <p>Size: L | Qty: <span id="qty-display-2">1</span></p>
-            </div>
-          </div>
-          <div class="d-flex align-items-center">
-            <button class="btn btn-outline-secondary quantity-btn minus" data-id="2">-</button>
-            <span id="qty-display-2" class="mx-2">1</span>
-            <button class="btn btn-outline-secondary quantity-btn plus" data-id="2">+</button>
-            <button class="btn btn-outline-danger remove-btn ms-3" data-id="2">Remove</button>
-          </div>
+        <div class="d-flex align-items-center">
+          <button class="btn btn-outline-secondary quantity-btn minus" data-id="2">-</button>
+          <span class="mx-2 qty-display">1</span>
+          <button class="btn btn-outline-secondary quantity-btn plus" data-id="2">+</button>
+          <button class="btn btn-outline-danger remove-btn ms-3" data-id="2">Remove</button>
         </div>
-
-        <!-- Product 3 -->
-        <div class="cart-item cart-box d-flex justify-content-between align-items-center" data-id="3" data-price="1200" data-discount="240" data-quantity="1">
-          <div class="d-flex align-items-center">
-            <img src="https://assets.myntassets.com/w_412,q_30,dpr_3,fl_progressive,f_webp/assets/images/30257319/2024/10/7/a7219db4-330b-49aa-baa6-69e5f2d0c5961728301989658-Womens-Oversize-Long-Sleeve-Johny-Collar-Pue-Cotton-Shirt-57-1.jpg" class="me-3 rounded" alt="Product" height="150px" />
-            <div>
-              <h4>Casual Shirt</h4>
-              <p>₹1200 <span style="color:green;">20% Off</span></p>
-              <p>Size: XL | Qty: <span id="qty-display-3">1</span></p>
-            </div>
-          </div>
-          <div class="d-flex align-items-center">
-            <button class="btn btn-outline-secondary quantity-btn minus" data-id="3">-</button>
-            <span id="qty-display-3" class="mx-2">1</span>
-            <button class="btn btn-outline-secondary quantity-btn plus" data-id="3">+</button>
-            <button class="btn btn-outline-danger remove-btn ms-3" data-id="3">Remove</button>
-          </div>
-        </div>
-
-        <!-- Product 4 -->
-        <div class="cart-item cart-box d-flex justify-content-between align-items-center" data-id="4" data-price="350" data-discount="70" data-quantity="1">
-          <div class="d-flex align-items-center">
-            <img src="https://static.aceomni.cmsaceturtle.com/prod/product-image/aceomni/Wrangler/Monobrand/WWTS001174/WWTS001174_1.jpg" class="me-3 rounded" alt="Product" height="150px" />
-            <div>
-              <h4>Blue T-shirt</h4>
-              <p>₹350 <span style="color:green;">20% Off</span></p>
-              <p>Size: S | Qty: <span id="qty-display-4">1</span></p>
-            </div>
-          </div>
-          <div class="d-flex align-items-center">
-            <button class="btn btn-outline-secondary quantity-btn minus" data-id="4">-</button>
-            <span id="qty-display-4" class="mx-2">1</span>
-            <button class="btn btn-outline-secondary quantity-btn plus" data-id="4">+</button>
-            <button class="btn btn-outline-danger remove-btn ms-3" data-id="4">Remove</button>
-          </div>
-        </div>
-
-        <!-- Product 5 -->
-        <div class="cart-item cart-box d-flex justify-content-between align-items-center" data-id="5" data-price="2000" data-discount="400" data-quantity="1">
-          <div class="d-flex align-items-center">
-            <img src="https://assets2.andaazfashion.com/media/catalog/product/r/e/red-georgette-floor-length-wedding-wear-anarkali-suit-lstv113260-1.jpg" class="me-3 rounded" alt="Product" height="150px" />
-            <div>
-              <h4>Red Anarkali</h4>
-              <p>₹2000 <span style="color:green;">20% Off</span></p>
-              <p>Size: XL | Qty: <span id="qty-display-5">1</span></p>
-            </div>
-          </div>
-          <div class="d-flex align-items-center">
-            <button class="btn btn-outline-secondary quantity-btn minus" data-id="5">-</button>
-            <span id="qty-display-5" class="mx-2">1</span>
-            <button class="btn btn-outline-secondary quantity-btn plus" data-id="5">+</button>
-            <button class="btn btn-outline-danger remove-btn ms-3" data-id="5">Remove</button>
-          </div>
-        </div>
-
-        <!-- Product 6 -->
-        <div class="cart-item cart-box d-flex justify-content-between align-items-center" data-id="6" data-price="1500" data-discount="300" data-quantity="1">
-          <div class="d-flex align-items-center">
-            <img src="https://thelotusfab.in/cdn/shop/files/ShrijiAvadh-SC-385-Purple_4.jpg?v=1753969392" class="me-3 rounded" alt="Product" height="150px" />
-            <div>
-              <h4>Party Ware Saree</h4>
-              <p>₹1500 <span style="color:green;">20% Off</span></p>
-              <p>Size: Free size | Qty: <span id="qty-display-6">1</span></p>
-            </div>
-          </div>
-          <div class="d-flex align-items-center">
-            <button class="btn btn-outline-secondary quantity-btn minus" data-id="6">-</button>
-            <span id="qty-display-6" class="mx-2">1</span>
-            <button class="btn btn-outline-secondary quantity-btn plus" data-id="6">+</button>
-            <button class="btn btn-outline-danger remove-btn ms-3" data-id="6">Remove</button>
-          </div>
-        </div>
-
       </div>
 
-      <!-- Price Summary -->
-      <div class="col-lg-4">
-        <div class="cart-summary">
-          <h6>Price Details</h6>
-          <hr />
-          <div id="price-summary">
-            <p>Total Product Price: <span id="total-price">₹0</span></p>
-            <p>Total Discounts: <span id="total-discount">-₹0</span></p>
-            <p>Delivery Charges: ₹150</p>
-            <hr />
-            <p><strong>Order Total:</strong> <span id="order-total">₹0</span></p>
-            <p id="saved-amount" style="color:green;">Yay! You saved ₹0</p>
-            <button class="btn btn-purple w-100" onclick="proceedToAddress()">Proceed to Checkout</button>
-            <hr />
-            <div class="d-flex align-items-center mt-3">
-          <img src="https://www.shutterstock.com/image-vector/food-delivery-man-riding-red-600nw-1327144634.jpg" alt="Delivery Boy" height="60px" class="me-2">
-           <span style="color:green; font-weight:500;">Trustworthy Service • Fast Delivery</span>
-           </div>
-           </div>
+      <!-- Product 3 -->
+      <div class="cart-item cart-box d-flex justify-content-between align-items-center" data-id="3" data-price="999" data-discount="200" data-quantity="1">
+        <div class="d-flex align-items-center">
+          <img src="images/kurti_black.avif" class="me-3 rounded" alt="Product Image" height="190px" />
+          <div>
+            <h4>Designer Kurti</h4>
+            <p>$999 <span style="color:green;">20% Off</span></p>
+            <p>Size: XL | Qty: <span class="qty-display">1</span></p>
+          </div>
+        </div>
+        <div class="d-flex align-items-center">
+          <button class="btn btn-outline-secondary quantity-btn minus" data-id="3">-</button>
+          <span class="mx-2 qty-display">1</span>
+          <button class="btn btn-outline-secondary quantity-btn plus" data-id="3">+</button>
+          <button class="btn btn-outline-danger remove-btn ms-3" data-id="3">Remove</button>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="cart-item cart-box d-flex justify-content-between align-items-center" data-id="4" data-price="1499" data-discount="300" data-quantity="1">
+        <div class="d-flex align-items-center">
+          <img src="images/summer_dress_floral.avif" class="me-3 rounded" alt="Product Image" height="190px" />
+          <div>
+            <h4>Floral Summer Dress</h4>
+            <p>$1499 <span style="color:green;">20% Off</span></p>
+            <p>Size: S | Qty: <span class="qty-display">1</span></p>
+          </div>
+        </div>
+        <div class="d-flex align-items-center">
+          <button class="btn btn-outline-secondary quantity-btn minus" data-id="4">-</button>
+          <span class="mx-2 qty-display">1</span>
+          <button class="btn btn-outline-secondary quantity-btn plus" data-id="4">+</button>
+          <button class="btn btn-outline-danger remove-btn ms-3" data-id="4">Remove</button>
+        </div>
+      </div>
+
+      <!-- Product 5 -->
+      <div class="cart-item cart-box d-flex justify-content-between align-items-center" data-id="5" data-price="899" data-discount="180" data-quantity="1">
+        <div class="d-flex align-items-center">
+          <img src="images/pink_dress.avif" class="me-3 rounded" alt="Product Image" height="190px" />
+          <div>
+            <h4>Pink Dress</h4>
+            <p>$899 <span style="color:green;">20% Off</span></p>
+            <p>Size: XL | Qty: <span class="qty-display">1</span></p>
+          </div>
+        </div>
+        <div class="d-flex align-items-center">
+          <button class="btn btn-outline-secondary quantity-btn minus" data-id="5">-</button>
+          <span class="mx-2 qty-display">1</span>
+          <button class="btn btn-outline-secondary quantity-btn plus" data-id="5">+</button>
+          <button class="btn btn-outline-danger remove-btn ms-3" data-id="5">Remove</button>
+        </div>
+      </div>
+
+      <!-- Product 6 -->
+      <div class="cart-item cart-box d-flex justify-content-between align-items-center" data-id="6" data-price="399" data-discount="80" data-quantity="1">
+        <div class="d-flex align-items-center">
+          <img src="images/blue_superhero_kids.webp" class="me-3 rounded" alt="Product Image" height="190px" />
+          <div>
+            <h4>Blue Superhero T-shirt</h4>
+            <p>$699 <span style="color:green;">20% Off</span></p>
+            <p>Size: Free size | Qty: <span class="qty-display">1</span></p>
+          </div>
+        </div>
+        <div class="d-flex align-items-center">
+          <button class="btn btn-outline-secondary quantity-btn minus" data-id="6">-</button>
+          <span class="mx-2 qty-display">1</span>
+          <button class="btn btn-outline-secondary quantity-btn plus" data-id="6">+</button>
+          <button class="btn btn-outline-danger remove-btn ms-3" data-id="6">Remove</button>
         </div>
       </div>
 
     </div>
+
+    <!-- Price Summary -->
+    <div class="col-lg-4">
+      <div class="cart-summary">
+        <h6>Price Details</h6>
+        <hr />
+        <div id="price-summary">
+          <p>Total Product Price: <span id="total-price">$0</span></p>
+          <p>Total Discounts: <span id="total-discount">-$0</span></p>
+          <p>Delivery Charges: $150</p>
+          <hr />
+          <p><strong>Order Total:</strong> <span id="order-total">$0</span></p>
+          <p id="saved-amount" style="color:green;">Yay! You saved $0</p>
+          <button class="btn btn-purple w-100" onclick="proceedToAddress()">Proceed to Checkout</button>
+          <hr />
+          <div class="d-flex align-items-center mt-3">
+            <img src="https://www.shutterstock.com/image-vector/food-delivery-man-riding-red-600nw-1327144634.jpg" alt="Delivery Boy" height="60px" class="me-2">
+            <span style="color:green; font-weight:500;">Trustworthy Service • Fast Delivery</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
 
-  <!-- Footer -->
-  <footer class="bg-dark text-white text-center py-3">
-    <p>&copy; 2025 Stitch Theory | All Rights Reserved</p>
-  </footer>
+<!-- Footer -->
+<footer class="pt-5 pb-4 bg-dark text-white">
+  <div class="container text-md-left">
+    <div class="row text-md-left">
+      <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+        <h5 class="text-uppercase mb-4 font-weight-bold">Stitch Theory</h5>
+        <p>Your luxury clothing brand committed to elegance, comfort, and timeless fashion. Explore our collections for men, women, and children.</p>
+      </div>
+      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+        <h5 class="text-uppercase mb-4 font-weight-bold">Quick Links</h5>
+        <p><a href="index.html" class="text-white">Home</a></p>
+        <p><a href="profile.html" class="text-white">Profile</a></p>
+        <p><a href="cart.html" class="text-white">Cart</a></p>
+        <p><a href="reviews_page.html" class="text-white">Reviews</a></p>
+      </div>
+      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+        <h5 class="text-uppercase mb-4 font-weight-bold">Support</h5>
+        <p><a href="faq.html" class="text-white">FAQs</a></p>
+        <p><a href="contact.html" class="text-white">Contact Us</a></p>
+        <p><a href="privacy.html" class="text-white">Privacy Policy</a></p>
+        <p><a href="terms.html" class="text-white">Terms of Use</a></p>
+      </div>
+      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+        <h5 class="text-uppercase mb-4 font-weight-bold">Contact</h5>
+        <p><i class="bi bi-house-door-fill me-2"></i>123 Fashion Street, Mumbai, India</p>
+        <p><i class="bi bi-envelope-fill me-2"></i>support@stitchtheory.com</p>
+        <p><i class="bi bi-phone-fill me-2"></i>‪+91 98765 43210‬</p>
+      </div>
+    </div>
+    <hr class="mb-4 bg-white">
+    <div class="row align-items-center">
+      <div class="col-md-7 col-lg-8">
+        <p>© 2025 Stitch Theory. All rights reserved.</p>
+      </div>
+      <div class="col-md-5 col-lg-4">
+        <div class="text-center text-md-right">
+          <a href="#" class="text-white me-4"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="text-white me-4"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="text-white me-4"><i class="bi bi-twitter"></i></a>
+          <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
 
-  <!-- Scripts -->
-  <script>
-    function updateCart() {
-      let items = document.querySelectorAll('.cart-item');
-      let totalPrice = 0;
-      let totalDiscount = 0;
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function updateCart() {
+    let items = document.querySelectorAll('.cart-item');
+    let totalPrice = 0;
+    let totalDiscount = 0;
 
-      items.forEach(item => {
-        let price = parseInt(item.getAttribute('data-price'));
-        let discount = parseInt(item.getAttribute('data-discount'));
-        let quantity = parseInt(item.getAttribute('data-quantity'));
-        totalPrice += price * quantity;
-        totalDiscount += discount * quantity;
-      });
+    items.forEach(item => {
+      let price = parseInt(item.getAttribute('data-price'));
+      let discount = parseInt(item.getAttribute('data-discount'));
+      let quantity = parseInt(item.getAttribute('data-quantity'));
+      totalPrice += price * quantity;
+      totalDiscount += discount * quantity;
 
-      document.getElementById('total-price').innerText = "₹" + totalPrice;
-      document.getElementById('total-discount').innerText = "-₹" + totalDiscount;
-      document.getElementById('order-total').innerText = "₹" + (totalPrice - totalDiscount + 150);
-      document.getElementById('saved-amount').innerText = "Yay! You saved ₹" + totalDiscount;
-    }
-
-    document.querySelectorAll('.quantity-btn').forEach(button => {
-      button.addEventListener('click', () => {
-        const id = button.getAttribute('data-id');
-        const item = document.querySelector(`.cart-item[data-id="${id}"]`);
-        const qtyDisplay = document.getElementById(`qty-display-${id}`);
-        let quantity = parseInt(item.getAttribute('data-quantity'));
-
-        if (button.classList.contains('plus')) {
-          quantity++;
-        } else if (button.classList.contains('minus') && quantity > 1) {
-          quantity--;
-        }
-
-        item.setAttribute('data-quantity', quantity);
-        qtyDisplay.textContent = quantity;
-
-        updateCart();
+      // Update quantity display inside the item
+      item.querySelectorAll('.qty-display').forEach(el => {
+        el.textContent = quantity;
       });
     });
 
-    document.querySelectorAll('.remove-btn').forEach(button => {
-      button.addEventListener('click', () => {
-        const id = button.getAttribute('data-id');
-        const item = document.querySelector(`.cart-item[data-id="${id}"]`);
-        item.remove();
-        updateCart();
-      });
+    document.getElementById('total-price').innerText = "$" + totalPrice;
+    document.getElementById('total-discount').innerText = "-$" + totalDiscount;
+    document.getElementById('order-total').innerText = "$" + (totalPrice - totalDiscount + 150);
+    document.getElementById('saved-amount').innerText = "Yay! You saved $" + totalDiscount;
+  }
+
+  document.querySelectorAll('.quantity-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const id = button.getAttribute('data-id');
+      const item = document.querySelector(`.cart-item[data-id="${id}"]`);
+      let quantity = parseInt(item.getAttribute('data-quantity'));
+
+      if (button.classList.contains('plus')) {
+        quantity++;
+      } else if (button.classList.contains('minus') && quantity > 1) {
+        quantity--;
+      }
+
+      item.setAttribute('data-quantity', quantity);
+      updateCart();
     });
+  });
 
-    function proceedToAddress() {
-      const totalPrice = document.getElementById('total-price').innerText;
-      const totalDiscount = document.getElementById('total-discount').innerText;
-      const orderTotal = document.getElementById('order-total').innerText;
+  document.querySelectorAll('.remove-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const id = button.getAttribute('data-id');
+      const item = document.querySelector(`.cart-item[data-id="${id}"]`);
+      item.remove();
+      updateCart();
+    });
+  });
 
-      localStorage.setItem('totalPrice', totalPrice);
-      localStorage.setItem('totalDiscount', totalDiscount);
-      localStorage.setItem('orderTotal', orderTotal);
+  function proceedToAddress() {
+    const totalPrice = document.getElementById('total-price').innerText;
+    const totalDiscount = document.getElementById('total-discount').innerText;
+    const orderTotal = document.getElementById('order-total').innerText;
 
-      window.location.href = "address.html";
-    }
+    localStorage.setItem('totalPrice', totalPrice);
+    localStorage.setItem('totalDiscount', totalDiscount);
+    localStorage.setItem('orderTotal', orderTotal);
 
-    document.addEventListener('DOMContentLoaded', updateCart);
-  </script>
+    window.location.href = "address.html";
+  }
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  document.addEventListener('DOMContentLoaded', updateCart);
+</script>
+
 </body>
 </html>

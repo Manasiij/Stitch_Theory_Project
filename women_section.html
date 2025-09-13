@@ -7,33 +7,62 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Trajan', serif;
       margin: 0;
       background: #f8f8f8;
       color: #111;
     }
     
-    .navbar {
-      background: #111;
-      padding: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: white;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+     .navbar {
+      background-color: white !important;
     }
-    
-    .navbar a {
-      color: white;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: bold;
+    .carousel-item img {
+      height: 500px;
+      object-fit: cover;
+      width: 100%;
+      transition: transform 0.5s ease;
     }
-    
-    .navbar a:hover {
-      text-decoration: underline;
+    .carousel-item:hover img {
+      transform: scale(1.05);
+    }
+    .section-title {
+      margin: 60px 0 30px;
+      text-align: center;
+      animation: fadeIn 1s ease forwards;
+    }
+    .icon-feature {
+      text-align: center;
+      padding: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .icon-feature:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 10px rgba(231, 221, 221, 0.2);
+    }
+    .icon-feature i {
+      font-size: 40px;
+      color: #555;
+    }
+    .icon-feature p {
+      margin-top: 10px;
+      font-weight: 500;
+    }
+    .product-card, .category-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .product-card:hover, .category-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    .product-card img, .category-card img {
+      width: 100%;
+      object-fit: cover;
+    }
+    .product-card img {
+      height: 200px;
+    }
+    .category-card img {
+      height: 250px;
     }
     
     .main-container {
@@ -208,61 +237,65 @@
       font-size: 18px;
       margin: 10px 0;
     }
-    
-    .quantity {
+
+    /* Quantity Control - Standardized */
+    .quantity-control {
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       margin: 15px 0;
-      gap: 10px;
+      gap: 5px;
     }
     
-    .quantity button {
-      padding: 8px 12px;
-      background: #666;
+    .quantity-control button {
+      width: 32px;
+      height: 32px;
       border: none;
-      color: white;
-      cursor: pointer;
-      border-radius: 4px;
-      font-weight: bold;
-    }
-    
-    .quantity button:hover {
-      background: #333;
-    }
-    
-    .quantity span {
-      font-size: 16px;
-      font-weight: bold;
-      min-width: 20px;
-    }
-    
-    .btn {
-      padding: 12px 20px;
-      margin: 5px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: all 0.2s;
-    }
-    
-    .btn-add {
       background: #111;
       color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.2s;
     }
     
-    .btn-add:hover {
+    .quantity-control button:hover {
       background: #333;
     }
     
-    .btn-shop {
-      background: #666;
-      color: white;
+    .quantity-control input {
+      width: 50px;
+      height: 32px;
+      text-align: center;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-weight: bold;
+      margin: 0 5px;
+    }
+
+    /* Buttons - Standardized */
+    .product-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
     }
     
-    .btn-shop:hover {
-      background: #555;
+    .btn-shop, .btn-cart {
+      flex: 1;
+      background-color: white;
+      color: #111;
+      border: 1px solid #111;
+      padding: 10px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .btn-shop:hover, .btn-cart:hover {
+      background-color: #111;
+      color: white;
+      border: 1px solid #111;
     }
     
     .no-results {
@@ -290,19 +323,47 @@
         grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
         gap: 15px;
       }
+      
+      .product-buttons {
+        flex-direction: column;
+        gap: 8px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="navbar">
-    <div class="logo">🛍️ Clothing Store</div>
-    <div>
-      <a href="index.html">Home</a>
-      <a href="men.html">Men</a>
-      <a href="children.html">Children</a>
-      <a href="cart.html">Cart 🛒</a>
+   <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top shadow-sm">
+    <div class="container-fluid">
+      <img src="Images/ST_logo-removebg-preview.png" alt="logo" width="150" height="50" class="border border-2 border-light" />
+      <link rel="icon" type="Images/png" href="Images/ST logo 2.jpg"/>
+      <a class="navbar-brand fs-4" href="index.html"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Search bar -->
+      <form class="d-flex mx-auto" style="width: 400px;">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+        <button class="btn btn-outline-dark" type="submit">Search</button>
+      </form>
+
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="reviews_page.html">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="gift_cards.html">Gift Card</a></li>
+        </ul>
+        <ul class="navbar-nav nav-icons ms-3 flex-row">
+          <li class="nav-item"><a class="nav-link" href="wishlist.html"><i class="bi bi-heart"></i></a></li>
+          <li class="nav-item"><a class="nav-link" href="cart.html"><i class="bi bi-bag"></i></a></li>
+          <li class="nav-item"><a class="nav-link" href="profile.html"><i class="bi bi-person"></i></a></li>
+        </ul>
+      </div>
     </div>
-  </div>
+  </nav>
 
   <div class="main-container">
     <div class="sidebar">
@@ -370,9 +431,9 @@
       <button class="clear-filters" onclick="clearAllFilters()">Clear All Filters</button>
     </div>
 
-    <div class="content">
-      <div class="content-header">
-        <h2> Women's Collection</h2>
+    <div class="content ">
+      <div class="content-header mt-5">
+        <h2>Women's Collection</h2>
         <div class="results-count" id="resultsCount">Showing all products</div>
       </div>
       
@@ -381,112 +442,128 @@
           <div class="product-category">Dress</div>
           <img src="images/summer_dress_floral.avif" alt="Floral Summer Dress">
           <h3>Floral Summer Dress</h3>
-          <p class="price">₹1,499</p>
-          <div class="quantity">
-            <button onclick="changeQty('dress1', -1)">-</button>
-            <span id="qty-dress1">1</span>
-            <button onclick="changeQty('dress1', 1)">+</button>
+          <p class="price">$1,499</p>
+          <div class="quantity-control">
+            <button onclick="updateQuantity('dress1', -1)">-</button>
+            <input type="text" id="qty-dress1" value="1" readonly>
+            <button onclick="updateQuantity('dress1', 1)">+</button>
           </div>
-          <button class="btn btn-add" onclick="addToCart('Floral Summer Dress', 1499, 'dress1')">Add to Cart</button>
-          <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
+          <div class="product-buttons">
+            <button class="btn-shop" onclick="shopNow('Floral Summer Dress', 1499, 'dress1')">Shop Now</button>
+            <button class="btn-cart" onclick="addToCart('Floral Summer Dress', 1499, 'dress1')">Add to Cart</button>
+          </div>
         </div>
 
         <div class="product" data-category="kurti" data-price="999" data-color="black">
           <div class="product-category">Ethnic</div>
           <img src="images/kurti_black.avif" alt="Designer Kurti">
           <h3>Designer Kurti</h3>
-          <p class="price">₹999</p>
-          <div class="quantity">
-            <button onclick="changeQty('kurti1', -1)">-</button>
-            <span id="qty-kurti1">1</span>
-            <button onclick="changeQty('kurti1', 1)">+</button>
+          <p class="price">$999</p>
+          <div class="quantity-control">
+            <button onclick="updateQuantity('kurti1', -1)">-</button>
+            <input type="text" id="qty-kurti1" value="1" readonly>
+            <button onclick="updateQuantity('kurti1', 1)">+</button>
           </div>
-          <button class="btn btn-add" onclick="addToCart('Designer Kurti', 999, 'kurti1')">Add to Cart</button>
-          <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
+          <div class="product-buttons">
+            <button class="btn-shop" onclick="shopNow('Designer Kurti', 999, 'kurti1')">Shop Now</button>
+            <button class="btn-cart" onclick="addToCart('Designer Kurti', 999, 'kurti1')">Add to Cart</button>
+          </div>
         </div>
 
         <div class="product" data-category="jeans" data-price="1799" data-color="black">
           <div class="product-category">Bottom</div>
           <img src="images/jeans_black.avif" alt="High Waist Jeans">
           <h3>High Waist Jeans</h3>
-          <p class="price">₹1,799</p>
-          <div class="quantity">
-            <button onclick="changeQty('jeans1', -1)">-</button>
-            <span id="qty-jeans1">1</span>
-            <button onclick="changeQty('jeans1', 1)">+</button>
+          <p class="price">$1,799</p>
+          <div class="quantity-control">
+            <button onclick="updateQuantity('jeans1', -1)">-</button>
+            <input type="text" id="qty-jeans1" value="1" readonly>
+            <button onclick="updateQuantity('jeans1', 1)">+</button>
           </div>
-          <button class="btn btn-add" onclick="addToCart('High Waist Jeans', 1799, 'jeans1')">Add to Cart</button>
-          <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
+          <div class="product-buttons">
+            <button class="btn-shop" onclick="shopNow('High Waist Jeans', 1799, 'jeans1')">Shop Now</button>
+            <button class="btn-cart" onclick="addToCart('High Waist Jeans', 1799, 'jeans1')">Add to Cart</button>
+          </div>
         </div>
 
         <div class="product" data-category="top" data-price="799" data-color="white">
           <div class="product-category">Top</div>
           <img src="images/top_white.avif" alt="Casual White Top">
           <h3>Casual White Top</h3>
-          <p class="price">₹799</p>
-          <div class="quantity">
-            <button onclick="changeQty('top1', -1)">-</button>
-            <span id="qty-top1">1</span>
-            <button onclick="changeQty('top1', 1)">+</button>
+          <p class="price">$799</p>
+          <div class="quantity-control">
+            <button onclick="updateQuantity('top1', -1)">-</button>
+            <input type="text" id="qty-top1" value="1" readonly>
+            <button onclick="updateQuantity('top1', 1)">+</button>
           </div>
-          <button class="btn btn-add" onclick="addToCart('Casual White Top', 799, 'top1')">Add to Cart</button>
-          <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
+          <div class="product-buttons">
+            <button class="btn-shop" onclick="shopNow('Casual White Top', 799, 'top1')">Shop Now</button>
+            <button class="btn-cart" onclick="addToCart('Casual White Top', 799, 'top1')">Add to Cart</button>
+          </div>
         </div>
 
         <div class="product" data-category="dress" data-price="2199" data-color="black">
           <div class="product-category">Dress</div>
           <img src="images/black_dress.avif" alt="Elegant Black Dress">
           <h3>Elegant Black Dress</h3>
-          <p class="price">₹2,199</p>
-          <div class="quantity">
-            <button onclick="changeQty('dress2', -1)">-</button>
-            <span id="qty-dress2">1</span>
-            <button onclick="changeQty('dress2', 1)">+</button>
+          <p class="price">$2,199</p>
+          <div class="quantity-control">
+            <button onclick="updateQuantity('dress2', -1)">-</button>
+            <input type="text" id="qty-dress2" value="1" readonly>
+            <button onclick="updateQuantity('dress2', 1)">+</button>
           </div>
-          <button class="btn btn-add" onclick="addToCart('Elegant Black Dress', 2199, 'dress2')">Add to Cart</button>
-          <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
+          <div class="product-buttons">
+            <button class="btn-shop" onclick="shopNow('Elegant Black Dress', 2199, 'dress2')">Shop Now</button>
+            <button class="btn-cart" onclick="addToCart('Elegant Black Dress', 2199, 'dress2')">Add to Cart</button>
+          </div>
         </div>
 
         <div class="product" data-category="ethnic" data-price="1299" data-color="floral">
           <div class="product-category">Ethnic</div>
           <img src="images/floral_kurta_set.avif" alt="Floral Kurta Set">
           <h3>Floral Kurta Set</h3>
-          <p class="price">₹1,299</p>
-          <div class="quantity">
-            <button onclick="changeQty('ethnic1', -1)">-</button>
-            <span id="qty-ethnic1">1</span>
-            <button onclick="changeQty('ethnic1', 1)">+</button>
+          <p class="price">$1,299</p>
+          <div class="quantity-control">
+            <button onclick="updateQuantity('ethnic1', -1)">-</button>
+            <input type="text" id="qty-ethnic1" value="1" readonly>
+            <button onclick="updateQuantity('ethnic1', 1)">+</button>
           </div>
-          <button class="btn btn-add" onclick="addToCart('Floral Kurta Set', 1299, 'ethnic1')">Add to Cart</button>
-          <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
+          <div class="product-buttons">
+            <button class="btn-shop" onclick="shopNow('Floral Kurta Set', 1299, 'ethnic1')">Shop Now</button>
+            <button class="btn-cart" onclick="addToCart('Floral Kurta Set', 1299, 'ethnic1')">Add to Cart</button>
+          </div>
         </div>
 
         <div class="product" data-category="jeans" data-price="1599" data-color="gray">
           <div class="product-category">Bottom</div>
           <img src="images/jeans_grey.avif" alt="Gray Skinny Jeans">
           <h3>Gray Skinny Jeans</h3>
-          <p class="price">₹1,599</p>
-          <div class="quantity">
-            <button onclick="changeQty('jeans2', -1)">-</button>
-            <span id="qty-jeans2">1</span>
-            <button onclick="changeQty('jeans2', 1)">+</button>
+          <p class="price">$1,599</p>
+          <div class="quantity-control">
+            <button onclick="updateQuantity('jeans2', -1)">-</button>
+            <input type="text" id="qty-jeans2" value="1" readonly>
+            <button onclick="updateQuantity('jeans2', 1)">+</button>
           </div>
-          <button class="btn btn-add" onclick="addToCart('Gray Skinny Jeans', 1599, 'jeans2')">Add to Cart</button>
-          <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
+          <div class="product-buttons">
+            <button class="btn-shop" onclick="shopNow('Gray Skinny Jeans', 1599, 'jeans2')">Shop Now</button>
+            <button class="btn-cart" onclick="addToCart('Gray Skinny Jeans', 1599, 'jeans2')">Add to Cart</button>
+          </div>
         </div>
 
         <div class="product" data-category="top" data-price="899" data-color="black">
           <div class="product-category">Top</div>
           <img src="images/top_black.avif" alt="Stylish Black Top">
           <h3>Stylish Black Top</h3>
-          <p class="price">₹899</p>
-          <div class="quantity">
-            <button onclick="changeQty('top2', -1)">-</button>
-            <span id="qty-top2">1</span>
-            <button onclick="changeQty('top2', 1)">+</button>
+          <p class="price">$899</p>
+          <div class="quantity-control">
+            <button onclick="updateQuantity('top2', -1)">-</button>
+            <input type="text" id="qty-top2" value="1" readonly>
+            <button onclick="updateQuantity('top2', 1)">+</button>
           </div>
-          <button class="btn btn-add" onclick="addToCart('Stylish Black Top', 899, 'top2')">Add to Cart</button>
-          <button class="btn btn-shop" onclick="goToCart()">Shop Now</button>
+          <div class="product-buttons">
+            <button class="btn-shop" onclick="shopNow('Stylish Black Top', 899, 'top2')">Shop Now</button>
+            <button class="btn-cart" onclick="addToCart('Stylish Black Top', 899, 'top2')">Add to Cart</button>
+          </div>
         </div>
       </div>
       
@@ -497,32 +574,41 @@
   </div>
 
   <script>
-    function changeQty(id, change) {
-      let qtyEl = document.getElementById("qty-" + id);
-      let qty = parseInt(qtyEl.textContent);
-      qty = Math.max(1, qty + change);
-      qtyEl.textContent = qty;
+    // Update quantity function - standardized
+    function updateQuantity(product, change) {
+      let qtyInput = document.getElementById("qty-" + product);
+      let qty = parseInt(qtyInput.value) + change;
+      if (qty < 1) qty = 1;
+      qtyInput.value = qty;
     }
 
-    function addToCart(name, price, id) {
-      let qty = parseInt(document.getElementById("qty-" + id).textContent);
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    // Add to cart function - standardized
+    function addToCart(name, price, product) {
+      let qty = parseInt(document.getElementById("qty-" + product).value);
+      
+      // Use in-memory storage instead of localStorage for Claude.ai compatibility
+      if (!window.cartItems) {
+        window.cartItems = [];
+      }
 
-      const existingItem = cart.find(item => item.name === name);
+      let existingItem = window.cartItems.find(item => item.name === name);
       if (existingItem) {
         existingItem.quantity += qty;
       } else {
-        cart.push({ name, price, quantity: qty });
+        window.cartItems.push({ name, price, quantity: qty });
       }
 
-      localStorage.setItem("cart", JSON.stringify(cart));
       alert(`${qty} x ${name} added to cart!`);
     }
 
-    function goToCart() {
-      window.location.href = "cart.html";
+    // Shop Now function - standardized
+    function shopNow(name, price, product) {
+      addToCart(name, price, product);
+      // In a real application, this would redirect to cart.html
+      alert("Redirecting to cart...");
     }
 
+    // Filter functions
     function filterProducts() {
       const products = document.querySelectorAll('.product');
       const productsContainer = document.getElementById('productsContainer');
@@ -612,7 +698,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-<footer class="bg-dark text-white text-center py-3 " >
+<footer class="bg-dark text-white text-center py-3">
   <p>&copy; 2025 ClothingStore | All Rights Reserved</p>
 </footer>
 </html>

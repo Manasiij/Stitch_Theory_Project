@@ -1,29 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Address Page</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
 <style>
-body { background-color: #f8f9fa; }
+ @font-face {
+font-family: 'Trajan';
+src: url('fonts/TrajanPro-Regular.otf') format('opentype');
+    }
+body { 
+  font-family: 'Trajan', serif;
+  background-color: #f8f9fa; }
 .address-box { background: white; border-radius: 8px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 .address-selected { background-color: #eef0f3; }
 .btn-purple { background-color: #070707; color: white; }
 .btn-purple:hover { background-color: #80434b; }
-.edit-link { color: #800080; cursor: pointer; }
+.edit-link { color: #800080; cursor: pointer; text-decoration: underline; }
 </style>
 </head>
 <body>
 
-<div class="container my-4">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top shadow-sm">
+    <div class="container-fluid">
+      <img src="Images/ST_logo-removebg-preview.png" alt="logo" width="150" height="50" class="border border-2 border-light" />
+      <link rel="icon" type="Images/png" href="Images/ST logo 2.jpg"/>
+      <a class="navbar-brand fs-4" href="index.html"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Search bar -->
+      <form class="d-flex mx-auto" style="width: 400px;">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+        <button class="btn btn-outline-dark" type="submit">Search</button>
+      </form>
+
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="reviews_page.html">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="gift_cards.html">Gift Card</a></li>
+        </ul>
+        <ul class="navbar-nav nav-icons ms-3 flex-row">
+          <li class="nav-item"><a class="nav-link" href="wishlist.html"><i class="bi bi-heart"></i></a></li>
+          <li class="nav-item"><a class="nav-link" href="cart.html"><i class="bi bi-bag"></i></a></li>
+          <li class="nav-item"><a class="nav-link" href="profile.html"><i class="bi bi-person"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<div class="container my-4 mt-5">
   <div class="row g-4">
     <div class="col-lg-8">
       <h5>Select Delivery Address</h5>
       <div id="addresses"></div>
       <button class="btn btn-link text-primary" onclick="showAddAddress()">+ ADD NEW ADDRESS</button>
 
-      <div id="add-address-form" style="display:none;" class="mt-2">
+      <div id="add-address-form" style="display:none;" class="mt-2" >
         <input type="text" id="new-name" class="form-control mb-2" placeholder="Enter Name"/>
         <input type="text" id="new-phone" class="form-control mb-2" placeholder="Enter Phone"/>
         <textarea id="new-address" class="form-control mb-2" placeholder="Enter Address"></textarea>
@@ -35,12 +74,12 @@ body { background-color: #f8f9fa; }
       <div class="address-box">
         <h6>Price Details</h6>
         <hr>
-        <p>Total Product Price: <span id="total-price">₹0</span></p>
-        <p>Total Discounts: <span id="total-discount">-₹0</span></p>
-        <p>Delivery Charges: ₹150</p>
+        <p>Total Product Price: <span id="total-price">$0</span></p>
+        <p>Total Discounts: <span id="total-discount">-$0</span></p>
+        <p>Delivery Charges: $150</p>
         <hr>
-        <p><strong>Order Total:</strong> <span id="order-total">₹0</span></p>
-        <p style="color:green;" id="saved-amount">Yay! You saved ₹0</p>
+        <p><strong>Order Total:</strong> <span id="order-total">$0</span></p>
+        <p style="color:green;" id="saved-amount">Yay! You saved $0</p>
         <button class="btn btn-purple w-100" onclick="proceedToPayment()">Deliver to this Address</button>
       </div>
     </div>
@@ -54,7 +93,7 @@ const defaultAddresses = [
   {name:"Prime Minister", phone:"1122334455", address:"10 Downing Street, Westminster, London, UK"}
 ];
 
-// Initialize localStorage ONLY if it's empty
+// Initialize localStorage only if empty
 if(!localStorage.getItem('addresses')) {
   localStorage.setItem('addresses', JSON.stringify(defaultAddresses));
 }
@@ -71,11 +110,12 @@ function loadAddresses() {
   const container = document.getElementById('addresses');
   container.innerHTML = '';
   const addresses = getAddresses();
+  const selectedIndex = localStorage.getItem('selectedAddressIndex') || 0;
 
   addresses.forEach((addr, index) => {
     container.innerHTML += `
       <div class="address-box" id="address-${index}">
-        <input type="radio" name="address" id="radio-${index}" value="${index}" ${index===0?'checked':''} onclick="selectAddress(${index})"/>
+        <input type="radio" name="address" id="radio-${index}" value="${index}" ${index==selectedIndex?'checked':''} onclick="selectAddress(${index})"/>
         <label for="radio-${index}">
           <strong>${addr.name}</strong><br>
           ${addr.phone}<br>
@@ -86,13 +126,14 @@ function loadAddresses() {
     `;
   });
 
-  selectAddress(0);
+  selectAddress(selectedIndex);
 }
 
 function selectAddress(index) {
   document.querySelectorAll('.address-box').forEach(box => box.classList.remove('address-selected'));
   const selectedBox = document.getElementById(`address-${index}`);
   if(selectedBox) selectedBox.classList.add('address-selected');
+  localStorage.setItem('selectedAddressIndex', index);
 }
 
 function showAddAddress() {
@@ -112,10 +153,10 @@ function addAddress() {
   addresses.push({name, phone, address});
   saveAddresses(addresses);
 
-  document.getElementById('new-name').value='';
-  document.getElementById('new-phone').value='';
-  document.getElementById('new-address').value='';
-  document.getElementById('add-address-form').style.display='none';
+  document.getElementById('new-name').value = '';
+  document.getElementById('new-phone').value = '';
+  document.getElementById('new-address').value = '';
+  document.getElementById('add-address-form').style.display = 'none';
   loadAddresses();
 }
 
@@ -123,13 +164,13 @@ function editAddress(index) {
   const addresses = getAddresses();
   const addr = addresses[index];
   const newName = prompt("Edit Name:", addr.name);
-  if(!newName) return;
+  if(newName === null) return;
   const newPhone = prompt("Edit Phone:", addr.phone);
-  if(!newPhone) return;
+  if(newPhone === null) return;
   const newAddress = prompt("Edit Address:", addr.address);
-  if(!newAddress) return;
+  if(newAddress === null) return;
 
-  addresses[index] = {name:newName, phone:newPhone, address:newAddress};
+  addresses[index] = {name:newName.trim(), phone:newPhone.trim(), address:newAddress.trim()};
   saveAddresses(addresses);
   loadAddresses();
 }
@@ -142,17 +183,81 @@ function proceedToPayment() {
 }
 
 function loadPriceDetails() {
-  document.getElementById('total-price').innerText = localStorage.getItem('totalPrice') || "₹0";
-  document.getElementById('total-discount').innerText = localStorage.getItem('totalDiscount') || "-₹0";
-  document.getElementById('order-total').innerText = localStorage.getItem('orderTotal') || "₹0";
-  document.getElementById('saved-amount').innerText = "Yay! You saved " + (localStorage.getItem('totalDiscount') || "₹0");
+  const totalPrice = localStorage.getItem('totalPrice') || "$0";
+  const totalDiscount = localStorage.getItem('totalDiscount') || "-$0";
+  const orderTotal = localStorage.getItem('orderTotal') || "$0";
+
+  document.getElementById('total-price').innerText = totalPrice;
+  document.getElementById('total-discount').innerText = totalDiscount;
+  document.getElementById('order-total').innerText = orderTotal;
+
+  // Extract numeric discount value
+  const discountValue = parseInt(totalDiscount.replace(/[^0-9-]/g,'')) || 0;
+  document.getElementById('saved-amount').innerText = "Yay! You saved $" + Math.abs(discountValue);
 }
 
-document.addEventListener('DOMContentLoaded', ()=>{
+document.addEventListener('DOMContentLoaded', () => {
   loadPriceDetails();
   loadAddresses();
 });
 </script>
+
+<!-- Footer -->
+  <footer class="pt-5 pb-4 bg-dark text-white">
+    <div class="container text-md-left">
+      <div class="row text-md-left">
+
+        <!-- About -->
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold">Stitch Theory</h5>
+          <p>Your luxury clothing brand committed to elegance, comfort, and timeless fashion. Explore our collections for men, women, and children.</p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold">Quick Links</h5>
+          <p><a href="index.html">Home</a></p>
+          <p><a href="profile.html">Profile</a></p>
+          <p><a href="cart.html">Cart</a></p>
+          <p><a href="reviews_page.html">Reviews</a></p>
+        </div>
+
+        <!-- Support -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold">Support</h5>
+          <p><a href="faq.html">FAQs</a></p>
+          <p><a href="contact.html">Contact Us</a></p>
+          <p><a href="privacy.html">Privacy Policy</a></p>
+          <p><a href="terms.html">Terms of Use</a></p>
+        </div>
+
+        <!-- Contact -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold">Contact</h5>
+          <p><i class="bi bi-house-door-fill me-2"></i>123 Fashion Street, Mumbai, India</p>
+          <p><i class="bi bi-envelope-fill me-2"></i>support@stitchtheory.com</p>
+          <p><i class="bi bi-phone-fill me-2"></i>‪+91 98765 43210‬</p>
+        </div>
+
+      </div>
+
+      <hr class="mb-4" style="background-color: white;">
+
+      <div class="row align-items-center">
+        <div class="col-md-7 col-lg-8">
+          <p>© 2025 Stitch Theory. All rights reserved.</p>
+        </div>
+        <div class="col-md-5 col-lg-4">
+          <div class="text-center text-md-right">
+            <a href="#"><i class="bi bi-facebook me-4"></i></a>
+            <a href="#"><i class="bi bi-instagram me-4"></i></a>
+            <a href="#"><i class="bi bi-twitter me-4"></i></a>
+            <a href="#"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

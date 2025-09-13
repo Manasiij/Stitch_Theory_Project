@@ -3,10 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Payment - Stitch Theory</title>
+  <title>Payment</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
+     @font-face {
+     font-family: 'Trajan';
+     src: url('fonts/TrajanPro-Regular.otf') format('opentype');
+    }
     body {
+      font-family: 'Trajan', serif;
       background-color: #f8f9fa;
     }
     .payment-box {
@@ -36,19 +41,40 @@
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="#">Stitch Theory</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+<!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top shadow-sm bg-white">
+    <div class="container-fluid">
+      <img src="Images/ST_logo-removebg-preview.png" alt="logo" width="150" height="50" class="border border-2 border-light" />
+      <link rel="icon" type="Images/png" href="Images/ST logo 2.jpg"/>
+      <a class="navbar-brand fs-4" href="index.html"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll">
         <span class="navbar-toggler-icon"></span>
       </button>
+
+      <form class="d-flex mx-auto" style="width: 400px;">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+        <button class="btn btn-outline-dark" type="submit">Search</button>
+      </form>
+
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="reviews_page.html">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="gift_cards.html">Gift Card</a></li>
+        </ul>
+        <ul class="navbar-nav nav-icons ms-3 flex-row">
+          <li class="nav-item"><a class="nav-link" href="wishlist.html"><i class="bi bi-heart"></i></a></li>
+          <li class="nav-item"><a class="nav-link" href="cart.html"><i class="bi bi-bag"></i></a></li>
+          <li class="nav-item"><a class="nav-link" href="profile.html"><i class="bi bi-person"></i></a></li>
+        </ul>
+      </div>
     </div>
   </nav>
 
-  <!-- Payment Section -->
-  <div class="container my-4">
+<!-- Payment Section -->
+  <div class="container my-4 mt-5">
     <div class="row g-4">
       <div class="col-lg-8">
         <div class="payment-box">
@@ -57,7 +83,7 @@
             <div class="method p-3 mb-3 selected-method" onclick="selectMethod(this)">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <h6>₹<span id="cod-price">0</span></h6>
+                  <h6>$<span id="cod-price">0</span></h6>
                   <p class="mb-0">Cash on Delivery <img src="https://img.icons8.com/ios-filled/50/000000/delivery.png" class="icon-small" alt="delivery icon"/></p>
                 </div>
                 <div>
@@ -68,7 +94,7 @@
             <div class="method p-3 mb-3" onclick="selectMethod(this)">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <h6>₹<span id="online-price">0</span></h6>
+                  <h6>$<span id="online-price">0</span></h6>
                   <p class="mb-0">Pay Online <img src="https://static.vecteezy.com/system/resources/previews/012/817/746/non_2x/online-payment-icon-style-vector.jpg" height="40px"/></p>
                   <small style="color:green;">Save extra with bank offers</small>
                 </div>
@@ -85,62 +111,114 @@
         <div class="payment-box">
           <h6>Price Details<span id="item-count"></span></h6>
           <hr />
-          <p>Total Product Price: ₹<span id="total-price">0</span></p>
-          <p>Total Discounts: -₹<span id="total-discount">0</span></p>
-          <p>Delivery Charges: ₹150</p>
+          <p>Total Product Price: $<span id="total-price">0</span></p>
+          <p>Total Discounts: -$<span id="total-discount">0</span></p>
+          <p>Delivery Charges: $150</p>
           <hr />
-          <p><strong>Order Total:</strong> ₹<span id="order-total"></span></p>
+          <p><strong>Order Total:</strong> $<span id="order-total"></span></p>
           <button class="btn btn-purple w-100 mt-3" onclick="placeOrder()">Proceed to Payment</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer class="bg-dark text-white text-center py-3">
-    <p>&copy; 2025 Stitch Theory | All Rights Reserved</p>
+<script>
+  const discountAmount = 10; // Discount for online payment
+
+  window.onload = function() {
+    const totalPrice = parseFloat(localStorage.getItem('totalPrice')?.replace('$','')) || 0;
+    const totalDiscount = parseFloat(localStorage.getItem('totalDiscount')?.replace('-$','')) || 0;
+    const orderTotal = parseFloat(localStorage.getItem('orderTotal')?.replace('$','')) || 0;
+    const itemCount = localStorage.getItem('itemCount') || "0";
+
+    document.getElementById('total-price').innerText = totalPrice.toFixed(2);
+    document.getElementById('total-discount').innerText = totalDiscount.toFixed(2);
+    document.getElementById('order-total').innerText = orderTotal.toFixed(2);
+    document.getElementById('item-count').innerText = itemCount;
+    document.getElementById('cod-price').innerText = orderTotal.toFixed(2);
+    document.getElementById('online-price').innerText = orderTotal.toFixed(2);
+  }
+
+  function selectMethod(element) {
+    const totalPrice = parseFloat(localStorage.getItem('orderTotal')?.replace('$','')) || 0;
+    const onlinePriceElement = document.getElementById('online-price');
+    const codPriceElement = document.getElementById('cod-price');
+    const orderTotalElement = document.getElementById('order-total');
+
+    document.querySelectorAll('.method').forEach(method => method.classList.remove('selected-method'));
+    element.classList.add('selected-method');
+    element.querySelector('input[type="radio"]').checked = true;
+
+    if (element.querySelector('h6 span').id === 'online-price') {
+      const newOnlinePrice = totalPrice - discountAmount;
+      onlinePriceElement.innerText = newOnlinePrice > 0 ? newOnlinePrice.toFixed(2) : '0';
+      orderTotalElement.innerText = newOnlinePrice > 0 ? newOnlinePrice.toFixed(2) : '0';
+    } else {
+      onlinePriceElement.innerText = totalPrice.toFixed(2);
+      orderTotalElement.innerText = totalPrice.toFixed(2);
+    }
+  }
+
+  function placeOrder() {
+    alert("Order placed successfully!");
+    localStorage.clear();
+    window.location.href = "index.html";
+  }
+</script>
+
+<!-- Footer -->
+  <footer class="pt-5 pb-4 bg-dark text-white">
+    <div class="container text-md-left">
+      <div class="row text-md-left">
+
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold">Stitch Theory</h5>
+          <p>Your luxury clothing brand committed to elegance, comfort, and timeless fashion. Explore our collections for men, women, and children.</p>
+        </div>
+
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold">Quick Links</h5>
+          <p><a href="index.html">Home</a></p>
+          <p><a href="profile.html">Profile</a></p>
+          <p><a href="cart.html">Cart</a></p>
+          <p><a href="reviews_page.html">Reviews</a></p>
+        </div>
+
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold">Support</h5>
+          <p><a href="faq.html">FAQs</a></p>
+          <p><a href="contact.html">Contact Us</a></p>
+          <p><a href="privacy.html">Privacy Policy</a></p>
+          <p><a href="terms.html">Terms of Use</a></p>
+        </div>
+
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold">Contact</h5>
+          <p><i class="bi bi-house-door-fill me-2"></i>123 Fashion Street, Mumbai, India</p>
+          <p><i class="bi bi-envelope-fill me-2"></i>support@stitchtheory.com</p>
+          <p><i class="bi bi-phone-fill me-2"></i>‪+91 98765 43210‬</p>
+        </div>
+
+      </div>
+
+      <hr class="mb-4" style="background-color: white;">
+
+      <div class="row align-items-center">
+        <div class="col-md-7 col-lg-8">
+          <p>© 2025 Stitch Theory. All rights reserved.</p>
+        </div>
+        <div class="col-md-5 col-lg-4">
+          <div class="text-center text-md-right">
+            <a href="#"><i class="bi bi-facebook me-4"></i></a>
+            <a href="#"><i class="bi bi-instagram me-4"></i></a>
+            <a href="#"><i class="bi bi-twitter me-4"></i></a>
+            <a href="#"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
   </footer>
 
-
-  <script>
-
-    window.onload = function() {
-      const totalPrice = localStorage.getItem('totalPrice') || "₹0";
-      const totalDiscount = localStorage.getItem('totalDiscount') || "-₹0";
-      const orderTotal = localStorage.getItem('orderTotal') || "₹0";
-      const itemCount = localStorage.getItem('itemCount') || "0";
-
-      document.getElementById('total-price').innerText = totalPrice.replace('₹','');
-      document.getElementById('total-discount').innerText = totalDiscount.replace('-₹','');
-      document.getElementById('order-total').innerText = orderTotal.replace('₹','');
-      document.getElementById('item-count').innerText = itemCount;
-      document.getElementById('cod-price').innerText = orderTotal.replace('₹','');
-      document.getElementById('online-price').innerText = orderTotal.replace('₹','');
-    }
-
-    function selectMethod(element) {
-      document.querySelectorAll('.method').forEach(method => method.classList.remove('selected-method'));
-      element.classList.add('selected-method');
-      element.querySelector('input[type="radio"]').checked = true;
-    }
-
-    function selectResell(option) {
-      document.getElementById('resell-no').classList.remove('btn-purple');
-      document.getElementById('resell-yes').classList.remove('btn-purple');
-      if(option === 'yes') {
-        document.getElementById('resell-yes').classList.add('btn-purple');
-      } else {
-        document.getElementById('resell-no').classList.add('btn-purple');
-      }
-    }
-
-    function placeOrder() {
-      alert("Order placed successfully!");
-      localStorage.clear();
-      window.location.href = "index.html";
-    }
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
