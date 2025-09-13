@@ -70,13 +70,15 @@
       transform: translateY(-3px);
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-    .wishlist-item img {
-      width: 100%;
-      height: 160px;           /* smaller image height */
-      border-radius: 8px;
-      object-fit: cover;
-      margin-bottom: 10px;
-    }
+  
+  .wishlist-img {
+    width: 100%;
+    height: 220px;          /* choose the height you like */
+    object-fit: cover;      /* maintains aspect ratio, fills box */
+    border-radius: 8px;     /* optional to match design */
+  }
+
+
     .wishlist-item h5 {
       font-size: 1rem;         /* slightly smaller text */
       margin-bottom: 6px;
@@ -126,7 +128,7 @@
             <div class="col-md-4">
               <div class="wishlist-item">
                 <img src="images/shirt_blue.avif"
-                  class="me-3 rounded" alt="Formal Blue Shirt" height="150px">
+                  class="me-3 wishlist-img rounded" alt="Formal Blue Shirt" height="200px">
                 <div class="flex-grow-1">
                   <h5>Formal Blue Shirt</h5>
                   <p class="price">$1299</p>
@@ -140,8 +142,8 @@
             <!-- Item 2 -->
             <div class="col-md-4">
               <div class="wishlist-item">
-                <img src="images/summer_dress_floral.avif" alt="Floral Summer Dress">
-                <div class="flex-grow-1">
+                <img src="images/summer_dress_floral.avif" class="wishlist-img" alt="Floral Summer Dress">
+                <div class="flex-grow-1 ">
                   <h5>Floral Summer Dress</h5>
                   <p class="price">$1499</p>
                 </div>
@@ -154,7 +156,7 @@
             <!-- Item 3 -->
             <div class="col-md-4">
               <div class="wishlist-item">
-                <img src="images/pink_dress.avif" alt="Pink Dress">
+                <img src="images/pink_dress.avif" class="wishlist-img" alt="Pink Dress">
                 <div class="flex-grow-1">
                   <h5>Pink Dress</h5>
                   <p class="price">$899</p>
@@ -164,17 +166,7 @@
                   <button class="btn btn-sm btn-outline-danger">Remove</button>
                 </div>
               </div>
-              <div class="wishlist-item">
-                <img src="images/kurti_black.avif" alt="Designer Kurti">
-                <div class="flex-grow-1">
-                  <h5>Designer Kurti</h5>
-                  <p class="price">$999</p>
-                </div>
-                <div class="wishlist-actions">
-                  <button class="btn btn-sm btn-dark">Add to Cart</button>
-                  <button class="btn btn-sm btn-outline-danger">Remove</button>
-                </div>
-              </div>
+              
             </div>
           </div>
 
@@ -182,7 +174,7 @@
           <div class="row">
             <div class="col-md-4">
               <div class="wishlist-item">
-                <img src="/Images/demin jeans.jpg" alt="Product 3">
+                <img src="/Images/demin jeans.jpg" class="wishlist-img" alt="Product 3">
                 <h5>Denim Jeans</h5>
                 <p class="price">$3999</p>
                 <div class="wishlist-actions">
@@ -193,7 +185,7 @@
             </div>
             <div class="col-md-4">
               <div class="wishlist-item">
-                <img src="/Images/two_kids.jpg" alt="Product 4">
+                <img src="/Images/two_kids.jpg" alt="Product 4" class="wishlist-img">
                 <h5>Kids combo</h5>
                 <p class="price">$1499</p>
                 <div class="wishlist-actions">
@@ -204,7 +196,7 @@
             </div>
             <div class="col-md-4">
               <div class="wishlist-item">
-                <img src="/Images/yelloe_summer_shorts.webp" alt="Product 5">
+                <img src="/Images/yelloe_summer_shorts.webp" alt="Product 5" class="wishlist-img">
                 <h5>Summer shorts</h5>
                 <p class="price">$6999</p>
                 <div class="wishlist-actions">
